@@ -10,6 +10,7 @@ public class Participantes extends Persona {
     private boolean infiltrado;
     private String nombreFalso; 
     private boolean eliminado;
+    private static int siguienteId = 1;
 
 
     public Participantes(int id, String nombre, String apellidos, LocalDate fechaNacimiento, String sexo, String nacionalidad, double deudaAcumulada) {
@@ -18,6 +19,7 @@ public class Participantes extends Persona {
         this.deudaAcumulada = deudaAcumulada;
         this.infiltrado = false;
         this.eliminado = false;
+        this.id = siguienteId++; 
     }
 
 
@@ -28,6 +30,7 @@ public class Participantes extends Persona {
         this.infiltrado = true;
         this.nombreFalso = nombreFalso;
         this.eliminado = false;
+        this.id = siguienteId++; 
     }
 
   
