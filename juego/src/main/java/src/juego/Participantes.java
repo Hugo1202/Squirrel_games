@@ -13,9 +13,8 @@ public class Participantes extends Persona {
     private static int siguienteId = 1;
 
 
-    public Participantes(int id, String nombre, String apellidos, LocalDate fechaNacimiento, String sexo, String nacionalidad, double deudaAcumulada) {
+    public Participantes(String nombre, String apellidos, LocalDate fechaNacimiento, String sexo, String nacionalidad, double deudaAcumulada) {
         super(nombre, apellidos, fechaNacimiento, sexo, nacionalidad);
-        this.id = id;
         this.deudaAcumulada = deudaAcumulada;
         this.infiltrado = false;
         this.eliminado = false;
@@ -23,9 +22,8 @@ public class Participantes extends Persona {
     }
 
 
-    public Participantes(int id, String nombre, String apellidos, LocalDate fechaNacimiento, String sexo, String nacionalidad, double deudaAcumulada, String nombreFalso) {
+    public Participantes(String nombre, String apellidos, LocalDate fechaNacimiento, String sexo, String nacionalidad, double deudaAcumulada, String nombreFalso) {
         super(nombre, apellidos, fechaNacimiento, sexo, nacionalidad);
-        this.id = id;
         this.deudaAcumulada = deudaAcumulada;
         this.infiltrado = true;
         this.nombreFalso = nombreFalso;

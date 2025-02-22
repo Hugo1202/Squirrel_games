@@ -1,7 +1,10 @@
 package src.excepciones;
 
-public class InfiltradoNoEliminableException extends Exception {
-    public InfiltradoNoEliminableException(String message) {
+public class InfiltradoNoEliminableException extends RuntimeException {
+   
+	private static final long serialVersionUID = 1L;
+
+	public InfiltradoNoEliminableException(String message) {
         super(message);
     }
 }
