@@ -31,8 +31,11 @@ public class Main {
 //		System.out.println(game.mostrarParticipantes());
 		System.out.println(game.mostrarPruebas());
 		game.jugarRonda();
-//		game.jugarRonda();
+		game.jugarRonda();
 		System.out.println(game);
 		System.out.println(game.mostrarParticipantes());
+		System.out.println(game.mostrarParticipantesInfiltrados());
+		System.out.println(game.mostrarParticipantesmuertos());
+		System.out.println(game.mostrarParticipantesVivos());
 	}
 }

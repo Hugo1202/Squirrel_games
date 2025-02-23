@@ -9,7 +9,7 @@ public class Juego {
 	private LocalDate fechaEvento;
 	private List<Participantes> participantes;
 //	private List<Pink_guards> guardias;
-    private List<Prueba> pruebas;
+	private List<Prueba> pruebas;
 	private int pruebaActual = 0;
 	private double boteTotal; // dinero acumulado segun la cantidad de eliminados
 
@@ -41,7 +41,25 @@ public class Juego {
 		return fechaEvento;
 	}
 
-	public int getMinijuegosRestantes() {
+	public int getPruebaActual() {
+		return pruebaActual;
+	}
+
+	public int getPruebaAnterior() {
+		if (this.pruebaActual <= 0) {
+			return pruebaActual--;
+		} else {
+			System.out.println("No hay prueba anterrior");
+		}
+		return pruebaActual;
+	}
+
+	public int getPruebaSiguiente() {
+		if (this.pruebaActual < this.pruebas.size()) {
+			return pruebaActual++;
+		} else {
+			System.out.println("No hay prueba siguiente");
+		}
 		return pruebaActual;
 	}
 
@@ -52,11 +70,11 @@ public class Juego {
 	public void agregarParticipante(Participantes p) {
 		this.participantes.add(p);
 	}
-	
+
 	public void agregarPrueba(Prueba p) {
 		this.pruebas.add(p);
 	}
-	
+
 	public void jugarRonda() {
 		this.pruebas.get(pruebaActual).simularPrueba(this.participantes);
 		if (this.pruebaActual < this.pruebas.size()) {
@@ -73,7 +91,8 @@ public class Juego {
 				Numero de ronda: %d / %d
 				Bote total: %.2f
 				""";
-		return String.format(info, this.ubicacion, this.fechaEvento, this.participantes.size(), this.pruebaActual, this.pruebas.size(), this.boteTotal);
+		return String.format(info, this.ubicacion, this.fechaEvento, this.participantes.size(), this.pruebaActual,
+				this.pruebas.size(), this.boteTotal);
 	}
 
 	public String mostrarParticipantes() {
@@ -83,7 +102,37 @@ public class Juego {
 		}
 		return info;
 	}
-	
+
+	public String mostrarParticipantesmuertos() {
+		String info = "Participantes eliminados: \n";
+		for (int i = 0; i < this.pruebas.get(pruebaActual).getEliminados().size(); i++) {
+			info += this.pruebas.get(pruebaActual).getEliminados().get(i) + "\n";
+		}
+		return info;
+	}
+
+	public String mostrarParticipantesVivos() {
+		String info = " \n";
+		if (this.pruebaActual != 0) {
+			for (int i = 0; i < this.pruebas.get(pruebaActual).getVencedores().size(); i++) {
+				info += this.pruebas.get(pruebaActual).getVencedores().get(i) + "\n";
+			}
+		} else {
+			info += mostrarParticipantes();
+		}
+		return info;
+	}
+
+	public String mostrarParticipantesInfiltrados() {
+		String info = "Participantes infiltrados: \n";
+		for (int i = 0; i < this.participantes.size(); i++) {
+			if (this.participantes.get(i).isInfiltrado()) {
+				info += this.participantes.get(i) + "\n";
+			}
+		}
+		return info;
+	}
+
 	public String mostrarPruebas() {
 		String info = "";
 		for (int i = 0; i < this.pruebas.size(); i++) {

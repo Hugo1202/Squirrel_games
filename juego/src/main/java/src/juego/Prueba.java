@@ -34,6 +34,14 @@ public class Prueba {
 		this.inscritos = inscritos;
 	}
 
+	public List<Participantes> getEliminados() {
+		return eliminados;
+	}
+
+	public List<Participantes> getVencedores() {
+		return vencedores;
+	}
+
 	public void simularPrueba(List<Participantes> Participantes) {
 		setInscritos(Participantes);
     	double porcentajeEliminados = (Math.random()*tipo.getMaxEliminados() + tipo.getMinEliminados()) / 100;
@@ -45,7 +53,7 @@ public class Prueba {
         for (int i = 0; i < eliminadosObjetivo; i++) {
             if (!inscritos.get(i).isInfiltrado()) {
             	inscritos.get(i).eliminar();
-                eliminados.add(inscritos.get(i));
+            	eliminados.add(inscritos.get(i));
             }
         }
         vencedores.addAll(inscritos);
