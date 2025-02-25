@@ -25,8 +25,8 @@ public class Juego {
 		return participantes;
 	}
 
-	public void setBoteTotal(double boteTotal) {
-		this.boteTotal = boteTotal;
+	public double getBoteTotal() {
+		return boteTotal;
 	}
 
 	public String getUbicacion() {
