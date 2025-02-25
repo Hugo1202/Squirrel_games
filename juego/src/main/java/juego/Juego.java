@@ -1,4 +1,4 @@
-package src.juego;
+package juego;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -46,25 +46,29 @@ public class Juego {
 	}
 
 	public int getPruebaAnterior() {
-		if (this.pruebaActual <= 0) {
-			return pruebaActual--;
+		if (this.pruebaActual > 0) {
+			return pruebaActual-1;
 		} else {
-			System.out.println("No hay prueba anterrior");
+			System.out.println("no hay prueba anterior");
 		}
 		return pruebaActual;
 	}
 
 	public int getPruebaSiguiente() {
 		if (this.pruebaActual < this.pruebas.size()) {
-			return pruebaActual++;
+			return pruebaActual+1;
 		} else {
-			System.out.println("No hay prueba siguiente");
+			System.out.println("no hay prueba siguiente");
 		}
 		return pruebaActual;
 	}
 
 	public void setPruebaActual(int newPruebaActual) {
 		this.pruebaActual = newPruebaActual;
+	}
+
+	public List<Prueba> getPruebas() {
+		return pruebas;
 	}
 
 	public void agregarParticipante(Participantes p) {
@@ -76,11 +80,12 @@ public class Juego {
 	}
 
 	public void jugarRonda() {
-		this.pruebas.get(pruebaActual).simularPrueba(this.participantes);
-		if (this.pruebaActual < this.pruebas.size()) {
-			this.pruebaActual++;
-		}
-	}
+        if (pruebaActual < pruebas.size()) {
+        	this.pruebas.get(pruebaActual).simularPrueba(getListaParticipantesVivos());
+            this.boteTotal += this.pruebas.get(pruebaActual).getEliminados().size() * 1000000;
+            pruebaActual++;
+        }
+    }
 
 	@Override
 	public String toString() {
@@ -103,25 +108,36 @@ public class Juego {
 		return info;
 	}
 
-	public String mostrarParticipantesmuertos() {
-		String info = "Participantes eliminados: \n";
-		for (int i = 0; i < this.pruebas.get(pruebaActual).getEliminados().size(); i++) {
-			info += this.pruebas.get(pruebaActual).getEliminados().get(i) + "\n";
-		}
-		return info;
-	}
+	public String getParticipantesVivos() {
+		String vivos = "Participantes sobrevivientes"
+				+ ": \n";
+        for (Participantes p : participantes) {
+            if (!p.isEliminado()) {
+                vivos += p;
+            }
+        }
+        return vivos;
+    }
 
-	public String mostrarParticipantesVivos() {
-		String info = " \n";
-		if (this.pruebaActual != 0) {
-			for (int i = 0; i < this.pruebas.get(pruebaActual).getVencedores().size(); i++) {
-				info += this.pruebas.get(pruebaActual).getVencedores().get(i) + "\n";
-			}
-		} else {
-			info += mostrarParticipantes();
-		}
-		return info;
-	}
+    public String getParticipantesMuertos() {
+        String muertos = "Participantes eliminados: \n";
+        for (Participantes p : participantes) {
+            if (p.isEliminado()) {
+                muertos += p;
+            }
+        }
+        return muertos;
+    }
+    
+    public List<Participantes> getListaParticipantesVivos() {
+        List<Participantes> vivos = new ArrayList<>();
+        for (Participantes p : participantes) {
+            if (!p.isEliminado()) {
+                vivos.add(p);
+            }
+        }
+        return vivos;
+    }
 
 	public String mostrarParticipantesInfiltrados() {
 		String info = "Participantes infiltrados: \n";

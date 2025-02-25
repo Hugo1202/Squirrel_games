@@ -1,7 +1,8 @@
-package src.juego;
+package juego;
 
 import java.time.LocalDate;
-import src.excepciones.InfiltradoNoEliminableException;
+
+import excepciones.InfiltradoNoEliminableException;
 
 
 public class Participantes extends Persona {
@@ -75,23 +76,22 @@ public class Participantes extends Persona {
 
 
     public void eliminar() throws InfiltradoNoEliminableException {
-        if (infiltrado) {
-            throw new InfiltradoNoEliminableException("No se puede eliminar a un jugador infiltrado.");
-        }
+//        if (infiltrado) {
+//            throw new InfiltradoNoEliminableException("No se puede eliminar a un jugador infiltrado.");
+//        }
         this.eliminado = true;
     }
 
 
     @Override
     public String toString() {
-        String info = super.toString();
-        info += "ID: " + id + "\n" +
-                "Deuda Acumulada: " + deudaAcumulada + "\n" +
-                "Infiltrado: " + infiltrado + "\n";
+    	String info = "ID: %d | %s";
         if (infiltrado) {
-            info += "Nombre Falso: " + nombreFalso + "\n";
+            info += "Infiltrado: %s | Nombre Falso: %s | Eliminado: %s\n";
+            return String.format(info, id, super.toString(), String.valueOf(this.infiltrado), this.nombreFalso, String.valueOf(eliminado));
+        } else {
+        	info += "Deuda Acumulada: %.2f | Eliminado: %s \n";
+            return String.format(info, id, super.toString(), deudaAcumulada, String.valueOf(eliminado));
         }
-        info += "Eliminado: " + eliminado + "\n";
-        return info;
     }
 }

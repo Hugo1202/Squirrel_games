@@ -1,4 +1,4 @@
-package src.juego;
+package testJuego;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

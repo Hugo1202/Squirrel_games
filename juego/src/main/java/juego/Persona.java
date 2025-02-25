@@ -1,4 +1,4 @@
-package src.juego;
+package juego;
 
 import java.time.LocalDate;
 
@@ -62,13 +62,7 @@ public abstract class Persona {
 
     @Override
     public String toString() {
-        String info = """
-            Nombre: %s
-            Apellidos: %s
-            Fecha de Nacimiento: %s
-            Sexo: %s
-            Nacionalidad: %s
-            """;
+        String info = "Nombre: %s | Apellidos: %s | Fecha de Nacimiento: %s | Sexo: %s | Nacionalidad: %s\n";
         return String.format(info, nombre, apellidos, fechaNacimiento, sexo, nacionalidad);
     }
 

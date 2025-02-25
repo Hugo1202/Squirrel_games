@@ -1,4 +1,4 @@
-package src.juego;
+package juego;
 
 import java.time.LocalDate;
 

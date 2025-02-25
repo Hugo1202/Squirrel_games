@@ -1,4 +1,4 @@
-package src.excepciones;
+package excepciones;
 
 public class IdRepetidoException extends RuntimeException {
     
