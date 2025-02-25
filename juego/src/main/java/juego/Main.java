@@ -5,9 +5,9 @@ import java.time.LocalDate;
 public class Main {
 	public static void main(String[] args) {
 		Juego game = new Juego("Oclajoma", LocalDate.of(2025, 2, 28), 10000.11);
-		Participantes j1 = new Participantes("pallo", "peel", LocalDate.of(2000, 12, 28), "Ha", "Cakahuense", 700.7);
-		Participantes j2 = new Participantes("paa", "peel", LocalDate.of(2000, 2, 29), "Ha", "Cakahuense", 700.7, "pepe");
-		Participantes j3 = new Participantes("paa", "peel", LocalDate.of(2000, 2, 29), "Ha", "Cakahuense", 700.7, "pepa");
+		Participantes j1 = new Participantes("pollo", "peel", LocalDate.of(2000, 12, 28), "Ha", "Cakahuense", 700.7);
+		Participantes j2 = new Participantes("patata", "peel", LocalDate.of(2000, 2, 29), "Ha", "Cakahuense", 700.7, "pepe");
+		Participantes j3 = new Participantes("naranja", "peel", LocalDate.of(2000, 2, 29), "Ha", "Cakahuense", 700.7, "pepa");
 		Participantes j4 = new Participantes("paja", "peel", LocalDate.of(2000, 12, 28), "Ha", "ohioyense", 700.7);
 		Participantes j5 = new Participantes("caballo", "peel", LocalDate.of(2000, 12, 28), "Ha", "ohioyense", 700.7);
 		Participantes j6 = new Participantes("cabra", "peel", LocalDate.of(2000, 12, 28), "Ha", "ohioyense", 700.7);

@@ -1,8 +1,8 @@
 package juego;
 
 public enum TipoPrueba {
-	LUZ_ROJA_LUZ_VERDE("Luz verde luz roja",  "Correr cuando la muñeca no mire.", 35, 55),
-    DALGONA("Dalgona", "Cortar la galleta sin romperla.", 30, 50),
+	LUZ_ROJA_LUZ_VERDE("Luz verde luz roja",  "Correr cuando la muñeca no mire.", 30, 65),
+    DALGONA("Dalgona", "Cortar la galleta sin romperla.", 30, 55),
     TIRON_DE_CUERDA("Tiron de cuerda","Ganar un juego de tira y afloja en equipo.", 50, 50);
     
 	private final String nombre;

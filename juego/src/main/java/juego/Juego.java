@@ -25,10 +25,6 @@ public class Juego {
 		return participantes;
 	}
 
-	public double getBoteTotal() {
-		return boteTotal;
-	}
-
 	public void setBoteTotal(double boteTotal) {
 		this.boteTotal = boteTotal;
 	}

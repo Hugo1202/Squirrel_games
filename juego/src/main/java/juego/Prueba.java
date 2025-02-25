@@ -2,6 +2,7 @@ package juego;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Prueba {
@@ -23,6 +24,7 @@ public class Prueba {
 	}
 
 	public List<Participantes> getInscritos() {
+		inscritos.sort(Comparator.comparingInt(Participantes::getId));
 		return inscritos;
 	}
 
@@ -31,10 +33,12 @@ public class Prueba {
 	}
 
 	public List<Participantes> getEliminados() {
+		eliminados.sort(Comparator.comparingInt(Participantes::getId));
 		return eliminados;
 	}
 
 	public List<Participantes> getVencedores() {
+		vencedores.sort(Comparator.comparingInt(Participantes::getId));
 		return vencedores;
 	}
 
@@ -44,10 +48,10 @@ public class Prueba {
         int eliminadosObjetivo = (int) (inscritos.size() * porcentajeEliminados);
         Collections.shuffle(inscritos);
         for (int i = 0; i < eliminadosObjetivo; i++) {
-            if (!inscritos.get(i).isEliminado()) {
+//            if (!inscritos.get(i).isEliminado()) {
                 inscritos.get(i).eliminar();
                 eliminados.add(inscritos.get(i));
-            }
+//            }
         }
         vencedores.addAll(inscritos);
         vencedores.removeAll(eliminados);
