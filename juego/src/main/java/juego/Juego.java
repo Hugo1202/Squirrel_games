@@ -25,8 +25,8 @@ public class Juego {
 		return participantes;
 	}
 
-	public void setBoteTotal(double boteTotal) {
-		this.boteTotal = boteTotal;
+	public double getBoteTotal() {
+		return this.boteTotal;
 	}
 
 	public String getUbicacion() {
@@ -78,7 +78,7 @@ public class Juego {
 	public void jugarRonda() {
         if (pruebaActual < pruebas.size()) {
         	this.pruebas.get(pruebaActual).simularPrueba(getListaParticipantesVivos());
-            this.boteTotal += this.pruebas.get(pruebaActual).getEliminados().size() * 1000000;
+            this.boteTotal += this.pruebas.get(pruebaActual).getEliminados().size() * 10000;
             pruebaActual++;
         }
     }

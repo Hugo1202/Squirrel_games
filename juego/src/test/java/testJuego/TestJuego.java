@@ -19,7 +19,7 @@ public class TestJuego  {
 	@BeforeEach
 	public void SetUp() {
 		System.out.println("Inicializando recursos compartidos para todas las pruebas.");
-		game = new Juego("Oclajoma", LocalDate.of(2025, 2, 28), 10000.11);
+		game = new Juego("Oclajoma", LocalDate.of(2025, 2, 28), 10000);
 		j1 = new Participantes("pollo", "peel", LocalDate.of(2000, 12, 28), "Ha", "Cakahuense", 700.7);
 		j2 = new Participantes("patata", "peel", LocalDate.of(2000, 2, 29), "Ha", "Cakahuense", 700.7, "pepe");
 		j3 = new Participantes("naranja", "peel", LocalDate.of(2000, 2, 29), "Ha", "Cakahuense", 700.7, "pepa");
@@ -75,8 +75,8 @@ public class TestJuego  {
         int maxEliminados = (int) (prueba.getInscritos().size() * maxPorcentaje);
         
         assertEquals(10, prueba.getInscritos().size(), "Todos los participantes deben estar inscritos");
-        assertTrue(prueba.getEliminados().size() >= minEliminados && prueba.getEliminados().size() <= maxEliminados, "Debe haber entre 3 y 6 eliminados");
-        assertEquals(10 - prueba.getEliminados().size(), prueba.getVencedores().size(), "Los vencedores deben ser los no eliminados");
+        assertTrue(prueba.getEliminados().size() >= minEliminados && prueba.getEliminados().size() <= maxEliminados, "Debe haber entre " + minEliminados + " y "  + maxEliminados + " eliminados");
+        assertEquals(10 - prueba.getEliminados().size(), prueba.getVencedores().size(), "Los vencedores no deben ser los eliminados");
         
         prueba = game.getPruebas().get(game.getPruebaActual());
         ArrayList<Participantes> pVivos = (ArrayList<Participantes>) game.getListaParticipantesVivos();
@@ -87,8 +87,8 @@ public class TestJuego  {
         maxEliminados = (int) (prueba.getInscritos().size() * maxPorcentaje);
         
         assertEquals(pVivos, prueba.getInscritos(), "Todos los participantes vivos deben estar inscritos");
-        assertTrue(prueba.getEliminados().size() >= minEliminados && prueba.getEliminados().size() <= maxEliminados, "Debe haber entre 3 y 5 eliminados");
-        assertEquals(game.getListaParticipantesVivos(), prueba.getVencedores(), "Los vencedores no deben ser eliminados");
+        assertTrue(prueba.getEliminados().size() >= minEliminados && prueba.getEliminados().size() <= maxEliminados, "Debe haber entre " + minEliminados + " y "  + maxEliminados + " eliminados");
+        assertEquals(game.getListaParticipantesVivos(), prueba.getVencedores(), "Los vencedores deben ser los participantes vivos");
         
         prueba = game.getPruebas().get(game.getPruebaActual());
         pVivos = (ArrayList<Participantes>) game.getListaParticipantesVivos();
@@ -98,17 +98,33 @@ public class TestJuego  {
         minEliminados = (int) (prueba.getInscritos().size() * minPorcentaje);
         maxEliminados = (int) (prueba.getInscritos().size() * maxPorcentaje);
         
-        assertEquals(pVivos, prueba.getInscritos(), "Todos los participantes deben estar inscritos");
-        assertTrue(prueba.getEliminados().size() >= minEliminados && prueba.getEliminados().size() <= maxEliminados, "Debe haber entre 5 eliminados");
-        assertEquals(game.getListaParticipantesVivos(), prueba.getVencedores(), "Los vencedores deben ser los no eliminados");
+        assertEquals(pVivos, prueba.getInscritos(), "Todos los participantes vivos deben estar inscritos");
+        assertTrue(prueba.getEliminados().size() >= minEliminados && prueba.getEliminados().size() <= maxEliminados, "Debe haber entre " + minEliminados + " y "  + maxEliminados + " eliminados");
+        assertEquals(game.getListaParticipantesVivos(), prueba.getVencedores(), "Los vencedores deben ser los participantes vivos");
         
         
     }
 	
-//	@Test
-//	public void testEliminarParticipante() {
-//		Participantes p = new Participantes("Maria", "Lopez", LocalDate.of(1985, 7, 15), "Femenino", "México", 7000);
-//		p.eliminar();
-//		assertTrue(p.isEliminado());
-//	}
+	@Test
+	public void testEliminarParticipante() {
+		j1.eliminar();
+		assertTrue(j1.isEliminado());
+	}
+	
+	@Test 
+	public void testTipoPrueba() {
+		Prueba prueba = game.getPruebas().get(game.getPruebaActual());
+        assertEquals("Luz verde luz roja", prueba.getTipo().getNombre(), "El nombre no coincide");
+        assertEquals("Correr cuando la muñeca no mire.", prueba.getTipo().getDescripcion(), "La descripción no coincide");
+        assertEquals(30, prueba.getTipo().getMinEliminados(), "El mínimo de eliminados no es correcto");
+        assertEquals(65, prueba.getTipo().getMaxEliminados(), "El máximo de eliminados no es correcto");
+    }
+	
+	@Test
+    void testGetParticipantes() {
+        assertEquals(10, game.getParticipantes().size(), "La cantidad de participantes no es correcta");
+        assertEquals(10000, game.getBoteTotal(), "El bote total no coincide");
+        assertEquals("Oclajoma", game.getUbicacion(), "La ubicación no coincide");
+        assertEquals(LocalDate.of(2025, 2, 28), game.getFechaEvento(), "La fecha del evento no coincide");
+    }
 }
