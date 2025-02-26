@@ -26,7 +26,11 @@ public class Juego {
 	}
 
 	public double getBoteTotal() {
+<<<<<<< HEAD
 		return this.boteTotal;
+=======
+		return boteTotal;
+>>>>>>> branch 'master' of https://github.com/Hugo1202/Squirrel_games
 	}
 
 	public String getUbicacion() {
