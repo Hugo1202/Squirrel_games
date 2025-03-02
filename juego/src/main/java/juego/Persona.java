@@ -2,6 +2,17 @@ package juego;
 
 import java.time.LocalDate;
 
+
+/**
+ * La clase {@code Persona} representa la estructura básica que deben de tener todas
+ * las personas en el juego, sin importar si son participantes, infiltrados o guardias.
+ * 
+ * @version 1.0
+ * @see Participantes
+ * @see Pink_Guards
+ */
+
+
 public abstract class Persona {
     private String nombre;
     private String apellidos;
@@ -10,6 +21,15 @@ public abstract class Persona {
     private String nacionalidad;
 
 
+/**
+ * Obtener información de la persona.
+ * 
+ * @param nombre de la persona.
+ * @param apellidos de la persona.
+ * @param fechaNacimiento de la persona.
+ * @param sexo de la persona.
+ * @param nacionalidad de la persona.
+ */
     public Persona(String nombre, String apellidos, LocalDate fechaNacimiento, String sexo, String nacionalidad) {
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -17,7 +37,7 @@ public abstract class Persona {
         this.sexo = sexo;
         this.nacionalidad = nacionalidad;
     }
-
+    
 
     public String getNombre() {
         return nombre;
@@ -58,6 +78,7 @@ public abstract class Persona {
     public void setNacionalidad(String nacionalidad) {
         this.nacionalidad = nacionalidad;
     }
+
 
 
     @Override
