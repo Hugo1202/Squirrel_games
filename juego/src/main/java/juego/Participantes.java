@@ -74,41 +74,25 @@ public class Participantes extends Persona {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public double getDeudaAcumulada() {
         return deudaAcumulada;
-    }
-
-    public void setDeudaAcumulada(double deudaAcumulada) {
-        this.deudaAcumulada = deudaAcumulada;
     }
 
     public boolean isInfiltrado() {
         return infiltrado;
     }
 
-    public void setInfiltrado(boolean infiltrado) {
-        this.infiltrado = infiltrado;
-    }
 
     public String getNombreFalso() {
         return nombreFalso;
     }
 
-    public void setNombreFalso(String nombreFalso) {
-        this.nombreFalso = nombreFalso;
-    }
 
     public boolean isEliminado() {
         return eliminado;
     }
 
-    public void setEliminado(boolean eliminado) {
-        this.eliminado = eliminado;
-    }
 
 /**
  * Elimina a participantes.
