@@ -1,4 +1,11 @@
-package squirrelGames;
+package testJuego;
+
+//import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+import excepciones.*;
+import juego.*;
 
 public class OrganizationTest {
 	@Test
