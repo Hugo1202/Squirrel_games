@@ -1,4 +1,4 @@
-package squirrelGames;
+package juego;
 
 public abstract class PinkGuards {
 	private String name;

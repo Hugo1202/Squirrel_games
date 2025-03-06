@@ -1,7 +1,10 @@
-package squirrelGames;
+package juego;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import excepciones.InvalidSupervisorException;
+import excepciones.OrganizationException;
 
 public class Organization {
 	private List<PinkGuards> members;
@@ -10,27 +13,27 @@ public class Organization {
 		this.members = new ArrayList<>();
 	}
 
-	public void registerMember(PinkGuards members) throws OrganizationException {
-		if (members == null) {
+	public void registerMember(PinkGuards member) throws OrganizationException {
+		if (member == null) {
 			throw new OrganizationException("El miembro no puede ser nulo.");
 		}
-		if (members.contains(members)) {
+		if (members.contains(member)) {
 			throw new OrganizationException("El miembro ya se encuentra registrado en la organización.");
 		}
 
-		if (members instanceof Workers) {
-			Workers workers = (Workers) members;
+		if (member instanceof Workers) {
+			Workers workers = (Workers) member;
 			if (workers.getSupervisor() != null && !members.contains(workers.getSupervisor())) {
 				throw new OrganizationException("El supervisor del Worker no está registrado en la organización.");
 			}
-		} else if (members instanceof Soldiers) {
-			Soldiers soldiers = (Soldiers) members;
+		} else if (member instanceof Soldiers) {
+			Soldiers soldiers = (Soldiers) member;
 			if (soldiers.getSupervisor() != null && !members.contains(soldiers.getSupervisor())) {
 				throw new OrganizationException("El supervisor del Soldier no está registrado en la organización.");
 			}
 		}
 
-		members.add(members);
+		members.add(member);
 	}
 
 	public void assignSupervisor(PinkGuards subordinate, PinkGuards supervisor) throws OrganizationException {

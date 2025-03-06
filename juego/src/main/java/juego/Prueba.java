@@ -17,7 +17,7 @@ public class Prueba {
     private List<Participantes> inscritos;
     private List<Participantes> eliminados;
     private List<Participantes> vencedores;
-    //private Pink_guards responsable;
+    private PinkGuards responsable;
 
     
     /**

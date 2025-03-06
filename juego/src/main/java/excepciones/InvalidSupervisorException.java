@@ -1,4 +1,4 @@
-package squirrelGames;
+package excepciones;
 
 public class InvalidSupervisorException extends Exception {
 	private static final long serialVersionUID = 1L;

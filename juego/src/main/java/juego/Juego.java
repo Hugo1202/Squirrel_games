@@ -22,10 +22,10 @@ public class Juego {
 	private String ubicacion;
 	private LocalDate fechaEvento;
 	private List<Participantes> participantes;
-//	private List<Pink_guards> guardias;
+	private List<PinkGuards> guardias;
 	private List<Prueba> pruebas;
 	private int pruebaActual = 0;
-	private double boteTotal; // dinero acumulado segun la cantidad de eliminados
+	private double boteTotal;
 
 	
 	/**
@@ -39,6 +39,7 @@ public class Juego {
 	public Juego(String ubicacion, LocalDate fechaEvento, double boteInicial) {
 		this.participantes = new ArrayList<>();
 		this.pruebas = new ArrayList<Prueba>();
+		this.guardias = new ArrayList<PinkGuards>();
 		this.ubicacion = ubicacion;
 		this.fechaEvento = fechaEvento;
 		this.boteTotal = boteInicial;
@@ -46,6 +47,11 @@ public class Juego {
 
 	public List<Participantes> getParticipantes() {
 		return participantes;
+	}
+	
+
+	public List<PinkGuards> getGuardias() {
+		return guardias;
 	}
 
 	public double getBoteTotal() {
@@ -127,8 +133,6 @@ public class Juego {
     }
 	
 	
-	
-
 	@Override
 	public String toString() {
 		String info = """
@@ -192,7 +196,7 @@ public class Juego {
 				+ ": \n";
         for (Participantes p : participantes) {
             if (!p.isEliminado()) {
-                vivos += p;
+                vivos += p + "\n";
             }
         }
         return vivos;
@@ -220,7 +224,7 @@ public class Juego {
         String muertos = "Participantes eliminados: \n";
         for (Participantes p : participantes) {
             if (p.isEliminado()) {
-                muertos += p;
+                muertos += p + "\n";
             }
         }
         return muertos;

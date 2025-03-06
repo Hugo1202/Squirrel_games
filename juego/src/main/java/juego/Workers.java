@@ -1,6 +1,8 @@
-package squirrelGames;
+package juego;
 
 import java.util.Objects;
+
+import excepciones.InvalidSupervisorException;
 
 public class Workers extends PinkGuards {
 	private Department department;
