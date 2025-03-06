@@ -8,18 +8,58 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import excepciones.InvalidSupervisorException;
+import excepciones.OrganizationException;
 import juego.*;
 
 
 public class TestJuego  {
 	private static Juego game;
+	private static Organization organization;
 	private static Participantes j1, j2, j3, j4, j5, j6, j7, j8, j9, j10;
 	private static Prueba p1, p2, p3;
+	private static Managers m;
+	private static Soldiers g1, g2, g3, g4;
+	private static Workers t1, t2, t3;
 
 	@BeforeEach
 	public void SetUp() {
 		System.out.println("Inicializando recursos compartidos para todas las pruebas.");
 		game = new Juego("Oclajoma", LocalDate.of(2025, 2, 28), 10000);
+		organization = new Organization();
+
+		m = new Managers("Manager1", 102, null);
+        g1 = new Soldiers("Guardia1", WeaponType.PISTOLA_GLOCK_17, 100, m);
+        g2 = new Soldiers("Guardia2", WeaponType.RIFLE_AUTOMATICO_HECKLER_Y_KOCH_G3, 80, m);
+        g3 = new Soldiers("Guardia3", WeaponType.PISTOLA_GLOCK_17, 100, m);
+        g4 = new Soldiers("Guardia4", WeaponType.RILE_DE_ASALTO_HECKLER_Y_KOCH_MP5, 80, g1);
+        t1 = new Workers("Trabajador1", Department.LIMPIEZA_DE_ELIMINADOS, g1);
+        t2 = new Workers("Trabajador2", Department.DISTRIBUCION_DE_ALIMENTOS, g1);
+        t3 = new Workers("Trabajador3", Department.PREPARACION_DE_JUEGOS, g1);
+
+
+        try {
+        	organization.registerMember(m);
+            organization.registerMember(g1);
+            organization.registerMember(g2);
+            organization.registerMember(g3);
+            organization.registerMember(g4);
+            organization.registerMember(t1);
+            organization.registerMember(t2);
+            organization.registerMember(t3);
+        } catch (OrganizationException e) {
+            System.out.println("Error al registrar miembro: " + e.getMessage());
+        }
+        m.addTeamMember(g1);
+        m.addTeamMember(g2);
+        m.addTeamMember(g3);
+        m.addTeamMember(g4);
+        m.addTeamMember(t1);
+        m.addTeamMember(t2);
+        m.addTeamMember(t3);
+        
+        game.agregarTeam(m);
+        
 		j1 = new Participantes("pollo", "peel", LocalDate.of(2000, 12, 28), "Ha", "Cakahuense", 700.7);
 		j2 = new Participantes("patata", "peel", LocalDate.of(2000, 2, 29), "Ha", "Cakahuense", 700.7, "pepe");
 		j3 = new Participantes("naranja", "peel", LocalDate.of(2000, 2, 29), "Ha", "Cakahuense", 700.7, "pepa");
@@ -33,6 +73,7 @@ public class TestJuego  {
 		p1 = new Prueba(TipoPrueba.LUZ_ROJA_LUZ_VERDE);
 		p2 = new Prueba(TipoPrueba.DALGONA);
 		p3 = new Prueba(TipoPrueba.TIRON_DE_CUERDA);
+		
 		game.agregarParticipante(j1);
 		game.agregarParticipante(j2);
 		game.agregarParticipante(j3);
@@ -68,7 +109,7 @@ public class TestJuego  {
 	@Test
     public void testSimularPrueba() {
 		Prueba prueba = game.getPruebas().get(game.getPruebaActual());
-        game.jugarRonda();
+        game.jugarRonda(m);
         double minPorcentaje = (double) prueba.getTipo().getMinEliminados() / 100;
         double maxPorcentaje = (double) prueba.getTipo().getMaxEliminados() / 100;
         int minEliminados = (int) (prueba.getInscritos().size() * minPorcentaje);
@@ -80,7 +121,7 @@ public class TestJuego  {
         
         prueba = game.getPruebas().get(game.getPruebaActual());
         ArrayList<Participantes> pVivos = (ArrayList<Participantes>) game.getListaParticipantesVivos();
-        game.jugarRonda();
+        game.jugarRonda(m);
         minPorcentaje = (double) prueba.getTipo().getMinEliminados() / 100;
         maxPorcentaje = (double) prueba.getTipo().getMaxEliminados() / 100;
         minEliminados = (int) (prueba.getInscritos().size() * minPorcentaje);
@@ -92,7 +133,7 @@ public class TestJuego  {
         
         prueba = game.getPruebas().get(game.getPruebaActual());
         pVivos = (ArrayList<Participantes>) game.getListaParticipantesVivos();
-        game.jugarRonda();
+        game.jugarRonda(m);
         minPorcentaje = (double) prueba.getTipo().getMinEliminados() / 100;
         maxPorcentaje = (double) prueba.getTipo().getMaxEliminados() / 100;
         minEliminados = (int) (prueba.getInscritos().size() * minPorcentaje);

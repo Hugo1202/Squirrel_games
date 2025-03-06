@@ -8,10 +8,14 @@ public class Workers extends PinkGuards {
 	private Department department;
 	private PinkGuards supervisor;
 
-	public Workers(String name, Department department, PinkGuards supervisor) throws InvalidSupervisorException {
+	public Workers(String name, Department department, PinkGuards supervisor) {
 		super(name);
 		this.department = department;
-		setSupervisor(supervisor);
+		try {
+			setSupervisor(supervisor);
+		} catch (InvalidSupervisorException e) {
+			System.err.println(e.getMessage());
+		}
 	}
 
 	public Department getDepartment() {

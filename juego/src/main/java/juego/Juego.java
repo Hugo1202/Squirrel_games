@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import excepciones.InvalidSupervisorException;
+
 
 /**
  * La clase {@code Juego} es la clase principal del proyecto.
@@ -22,7 +24,7 @@ public class Juego {
 	private String ubicacion;
 	private LocalDate fechaEvento;
 	private List<Participantes> participantes;
-	private List<PinkGuards> guardias;
+	private List<List <PinkGuards>> guardias;
 	private List<Prueba> pruebas;
 	private int pruebaActual = 0;
 	private double boteTotal;
@@ -39,7 +41,7 @@ public class Juego {
 	public Juego(String ubicacion, LocalDate fechaEvento, double boteInicial) {
 		this.participantes = new ArrayList<>();
 		this.pruebas = new ArrayList<Prueba>();
-		this.guardias = new ArrayList<PinkGuards>();
+		this.guardias = new ArrayList<List <PinkGuards>>();
 		this.ubicacion = ubicacion;
 		this.fechaEvento = fechaEvento;
 		this.boteTotal = boteInicial;
@@ -50,7 +52,7 @@ public class Juego {
 	}
 	
 
-	public List<PinkGuards> getGuardias() {
+	public List<List <PinkGuards>> getGuardias() {
 		return guardias;
 	}
 
@@ -103,6 +105,10 @@ public class Juego {
 	public void agregarPrueba(Prueba p) {
 		this.pruebas.add(p);
 	}
+	
+	public void agregarTeam(Managers m) {
+		this.guardias.add(m.getTeam());
+	}
 
 	
 	
@@ -124,11 +130,18 @@ public class Juego {
 	 */
 	
 	
-	public void jugarRonda() {
+	public void jugarRonda(Managers responsable) {
         if (pruebaActual < pruebas.size()) {
-        	this.pruebas.get(pruebaActual).simularPrueba(getListaParticipantesVivos());
-            this.boteTotal += this.pruebas.get(pruebaActual).getEliminados().size() * 10000;
-            pruebaActual++;
+        	try {
+    			this.pruebas.get(pruebaActual).setResponsable(responsable);
+    			System.out.println("\nSimulando Rondas...");
+            	this.pruebas.get(pruebaActual).simularPrueba(getListaParticipantesVivos());
+                this.boteTotal += this.pruebas.get(pruebaActual).getEliminados().size() * 10000;
+                pruebaActual++;
+    		} catch (InvalidSupervisorException e) {
+    			System.out.println("Error al asignar responsble: " + e.getMessage());
+    		}
+            
         }
     }
 	
@@ -312,6 +325,9 @@ public class Juego {
 		String info = "";
 		for (int i = 0; i < this.pruebas.size(); i++) {
 			info += this.pruebas.get(i).getTipo() + ": " + this.pruebas.get(i).getTipo().getDescripcion() + "\n";
+			if (this.pruebas.get(i).getResponsable() != null) {
+				info += "Con reponsable: " + this.pruebas.get(i).getResponsable().getName() + "\n";
+			}
 		}
 		return info;
 	}

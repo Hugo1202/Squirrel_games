@@ -62,8 +62,8 @@ public class Managers extends PinkGuards {
 
 	@Override
 	public String toString() {
-		return "Manager{" + "name='" + getName() + '\'' + ", munition=" + munition + ", weapon=" + DEFAULT_WEAPON
-				+ ", team=" + team + ", pruebaResponsable='" + pruebaResponsable + '\'' + ", rank=" + getRank() + '}';
+		return "Manager{ " + "name= '" + getName() + '\'' + ", munition= " + munition + ", weapon= " + DEFAULT_WEAPON
+				+ ", team= " + team + ", pruebaResponsable='" + pruebaResponsable + '\'' + ", rank= " + getRank() + '}';
 	}
 
 	@Override

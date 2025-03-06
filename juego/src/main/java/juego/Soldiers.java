@@ -9,11 +9,16 @@ public class Soldiers extends PinkGuards {
 	private int munition;
 	private PinkGuards supervisor;
 
-	public Soldiers(String name, WeaponType weapon, int munition, PinkGuards supervisor) throws InvalidSupervisorException {
+	public Soldiers(String name, WeaponType weapon, int munition, PinkGuards supervisor)  {
         super(name);
         this.weapon = weapon;
         this.munition = munition;
-        setSupervisor(supervisor);
+        
+        try {
+			setSupervisor(supervisor);
+		} catch (InvalidSupervisorException e) {
+			System.err.println(e.getMessage() + name + ".");
+		}
     }
 
 	public WeaponType getWeapon() {
@@ -41,7 +46,7 @@ public class Soldiers extends PinkGuards {
 			this.supervisor = null;
 		} else {
 			if (supervisor.getRank() <= this.getRank()) {
-				throw new InvalidSupervisorException("Supervisor debe tener mayor rango que Soldier.");
+				throw new InvalidSupervisorException("Supervisor debe tener mayor rango que ");
 			}
 			this.supervisor = supervisor;
 		}
