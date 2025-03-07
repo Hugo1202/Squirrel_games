@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentación De Mantenimiento</title>
+    <link rel="icon" href="../../img/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="../../css/style_documentacion.css">
+</head>
+
+<body>
+
+    <header>
+        <nav class="top-menu">
+            <div class="logo">
+                <a href="../../../index.html">
+                    <img src="../../img/logo.png" alt="Logo de Squid Games" width="100" height="50">
+                </a>
+            </div>
+            <ul class="menu">
+                <li><a href="../../../index.html">Inicio</a></li>
+                <li class="dropdown">
+                    <a href="#">Documentación</a>
+                    <ul class="dropdown-content">
+                        <li><a href="./doc_tecnica.html">Documentación técnica</a></li>
+                        <li><a href="./doc_usuario.html">Documentación de usuario</a></li>
+                        <li><a href="./doc_proyecto.html">Documentación de proyecto</a></li>
+                        <li><a href="./doc_mantenimiento.html">Documentación de mantenimiento</a></li>
+                    </ul>
+                </li>
+                <li><a href="../participantes.html">Participantes</a></li>
+                <li><a href="../descargar_proyecto.html">Descargar Proyecto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="doc-wrapper">
+        <h2> </h2>
+        <div class="doc-section">
+            <div class="doc-section">
+                <h2>Documentación de Mantenimiento</h2>
+
+                <p>Para asegurar que <span class="doc-highlight">Squirrel Games</span> se mantenga correctamente a lo
+                    largo del tiempo, es importante seguir estas recomendaciones:</p>
+
+                <h3>Actualización del Entorno</h3>
+                <ul>
+                    <li>Verificar regularmente que Maven esté actualizado.</li>
+                    <li>Revisar las versiones de dependencias en el <span class="doc-highlight">pom.xml</span>.</li>
+                    <li>Si se actualiza Java, asegurar compatibilidad con plugins de Maven.</li>
+                </ul>
+
+                <h3>Mantenimiento del Código</h3>
+                <ul>
+                    <li>Añadir pruebas unitarias nuevas para cada funcionalidad añadida.</li>
+                    <li>Ejecutar las pruebas completas antes de cualquier release.</li>
+                    <li>Documentar cada cambio relevante con Javadoc y README actualizado.</li>
+                </ul>
+
+                <h3>Control de Versiones</h3>
+                <ul>
+                    <li>Usar Git para registrar cada modificación.</li>
+                    <li>Dividir el trabajo en ramas para nuevas funcionalidades.</li>
+                    <li>Revisar los commits de cada colaborador antes de hacer merge.</li>
+                </ul>
+
+                <h3>Organización del Repositorio</h3>
+                <ul>
+                    <li>src/ para el código fuente.</li>
+                    <li>test/ para las pruebas.</li>
+                    <li>docs/ para documentación adicional (diagramas, informes, etc.).</li>
+                    <li>.gitignore bien configurado para evitar subir basura.</li>
+                </ul>
+
+                <h3>Mejoras Futuras</h3>
+                <ul>
+                    <li>Automatizar generación de reportes (cobertura de tests).</li>
+                    <li>Publicar documentación y resultados de cobertura en GitHub Pages.</li>
+                    <li>Ampliar funcionalidad del juego con nuevas pruebas o roles.</li>
+                </ul>
+
+                <p>Con esta política de mantenimiento, <span class="doc-highlight">Squirrel Games</span> se garantiza
+                    como un proyecto sólido, escalable y fácil de evolucionar.</p>
+            </div>
+        </div>
+
+</body>
+
+</html>

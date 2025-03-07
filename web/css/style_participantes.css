@@ -725,6 +725,16 @@ img {
 	}
 }
 
+#logoSquidGames {
+    width: 100px;
+    height: 50px;
+    object-fit: contain;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+}
 
 
 .hover-info {

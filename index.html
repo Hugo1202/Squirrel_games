@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Página con Preloader</title>
+  <title>Proyecto SquidGames</title>
+  <link rel="icon" href="./web/img/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="./web/css/style.css">
 </head>
 <body class="no-scroll">
@@ -103,36 +104,29 @@
   <header>
     <nav class="top-menu">
       <div class="logo">
-        <!-- Reemplaza por tu imagen o nombre de empresa -->
-        <a href="#">EmpresaLogo</a>
+        <a href="./index.html">
+            <img src="./web/img/logo.png" alt="Logo de Squid Games" width="100" height="50">
+        </a>
       </div>
       <ul class="menu">
-        <li><a href="#">Inicio</a></li>
+        <li><a href="./index.html">Inicio</a></li>
         <li class="dropdown">
-          <a href="#">Clases</a>
+          <a href="#">Documentación</a>
           <ul class="dropdown-content">
-            <li><a href="#">Participantes</a></li>
-            <li><a href="#">Guardias</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#">Clases</a>
-          <ul class="dropdown-content">
-            <li><a href="#">Participantes</a></li>
-            <li><a href="#">Guardias</a></li>
+            <li><a href="./web/pag/documentacion/doc_tecnica.html">Documentación técnica</a></li>
+            <li><a href="./web/pag/documentacion/doc_usuario.html">Documentación de usuario</a></li>
+            <li><a href="./web/pag/documentacion/doc_proyecto.html">Documentación de proyecto</a></li>
+            <li><a href="./web/pag/documentacion/doc_mantenimiento.html">Documentación de mantenimiento</a></li>
           </ul>
         </li>
         <li><a href="./web/pag/participantes.html">Participantes</a></li>
+        <li><a href="./web/pag/descargar_proyecto.html">Descargar Proyecto</a></li>
       </ul>
     </nav>
   </header>
   
   <!-- Contenido principal (oculto hasta que se oculte el preloader) -->
-  <div id="contenido">
-    <h1>Bienvenido a mi página</h1>
-    <p>Esta es la página principal que se muestra después del preloader.</p>
-    <!-- Agrega aquí el resto de tu contenido -->
-  </div>
+
 
   <!-- Librerías GSAP -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
