@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+
 public class Managers extends PinkGuards {
 	public static final String DEFAULT_WEAPON = "SMITH_Y_WESSON_MODEL_10";
 
 	private int munition;
 	private List<PinkGuards> team;
-	private String pruebaResponsable;
+	private Prueba pruebaResponsable;
 
 	public Managers(String name, int munition, List<PinkGuards> team) {
         super(name);
@@ -47,12 +48,12 @@ public class Managers extends PinkGuards {
 		this.team.remove(member);
 	}
 
-	public String getPruebaResponsable() {
+	public Prueba getPruebaResponsable() {
 		return pruebaResponsable;
 	}
 
-	public void setPruebaResponsable(String pruebaResponsable) {
-		this.pruebaResponsable = pruebaResponsable;
+	public void setPruebaResponsable(Prueba prueba) {
+		this.pruebaResponsable = prueba;
 	}
 
 	@Override
@@ -60,11 +61,14 @@ public class Managers extends PinkGuards {
 		return 3;
 	}
 
-	@Override
-	public String toString() {
-		return "Manager{ " + "name= '" + getName() + '\'' + ", munition= " + munition + ", weapon= " + DEFAULT_WEAPON
-				+ ", team= " + team + ", pruebaResponsable='" + pruebaResponsable + '\'' + ", rank= " + getRank() + '}';
-	}
+	 @Override
+	    public String toString() {
+	        return String.format("Manager | Nombre: %s | Munición: %d | Equipo: %d miembros",
+	            name,
+	            munition,
+	            team.size()
+	        );
+	    }
 
 	@Override
 	public boolean equals(Object o) {

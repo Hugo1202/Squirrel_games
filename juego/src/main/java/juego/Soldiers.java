@@ -1,24 +1,24 @@
 package juego;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+import enums.WeaponType;
 import excepciones.InvalidSupervisorException;
 
 public class Soldiers extends PinkGuards {
 	private WeaponType weapon;
 	private int munition;
 	private PinkGuards supervisor;
+	private List<PinkGuards> team;
+	
 
-	public Soldiers(String name, WeaponType weapon, int munition, PinkGuards supervisor)  {
+	public Soldiers(String name, WeaponType weapon, int munition)  {
         super(name);
         this.weapon = weapon;
         this.munition = munition;
-        
-        try {
-			setSupervisor(supervisor);
-		} catch (InvalidSupervisorException e) {
-			System.err.println(e.getMessage() + name + ".");
-		}
+        this.team = new ArrayList<>();
     }
 
 	public WeaponType getWeapon() {
@@ -46,9 +46,15 @@ public class Soldiers extends PinkGuards {
 			this.supervisor = null;
 		} else {
 			if (supervisor.getRank() <= this.getRank()) {
-				throw new InvalidSupervisorException("Supervisor debe tener mayor rango que ");
+				throw new InvalidSupervisorException("Supervisor debe tener mayor rango que " + getName() + ".");
 			}
 			this.supervisor = supervisor;
+		}
+	}
+	
+	public void addTeamMember(PinkGuards member) {
+		if (member != null) {
+			this.team.add(member);
 		}
 	}
 
@@ -58,10 +64,14 @@ public class Soldiers extends PinkGuards {
 	}
 
 	@Override
-	public String toString() {
-		return "Soldier{" + "name='" + getName() + '\'' + ", weapon=" + weapon + ", munition=" + munition
-				+ ", supervisor=" + (supervisor != null ? supervisor.getName() : "None") + ", rank=" + getRank() + '}';
-	}
+    public String toString() {
+        String info = "Soldier | Nombre: %s | Arma: %s | Munición: %d";
+        if (supervisor != null) {
+            info += " | Supervisor: %s";
+            return String.format(info + " | Equipo: %d miembros", name, weapon, munition, supervisor.name, team.size());
+        }
+        return String.format(info + " | Equipo: %d miembros", name, weapon, munition, team.size());
+    }
 
 	@Override
 	public boolean equals(Object o) {
