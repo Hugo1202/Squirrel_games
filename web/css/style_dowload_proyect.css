@@ -2,38 +2,9 @@ body {
     height: 800vh;
     background: black;
     margin: 0;
-    color: white;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+    /* El overflow se controla mediante la clase */
   }
-  
-  .no-scroll {
-    overflow: hidden;
-  }
-  
-  #preloader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-  }
-  
-  svg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-  }
-  
+
   #contenido {
     display: none;
     background-color: white;
@@ -73,6 +44,9 @@ header {
     color: #fff;
   }
   
+  .no-scroll {
+    overflow: hidden;
+  }
   /* Logo (izquierda) */
   .top-menu .logo a {
     color: #FE3477; /* Acento rojo estilo Squid Game */
@@ -142,9 +116,7 @@ header {
 /* Al pasar el mouse sobre .dropdown, muestra .dropdown-content */
 .dropdown:hover .dropdown-content {
   display: block;
-}
-
-  
+}  
   
   /* Para pantallas de hasta 768px de ancho */
 @media screen and (max-width: 768px) {
@@ -189,136 +161,70 @@ header {
   }
 }
 
-
-/* Espaciador para el menú fijo */
-.menu-spacer {
-  height: 80px;
+.doc-section {
+    background-color: black;
+    color: white;
+    border: 2px solid #E50914;
+    padding: 30px;
+    text-align: center;
+    margin: 20px 0;
+    border-radius: 12px;
 }
 
-/* Banner full-screen */
-.banner {
-  position: relative;
-  width: 100%;
-  height: 80vh; /* Alto casi completo */
-  background: url('../img/banner.webp') no-repeat center center;
-  background-size: cover;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: white;
-  overflow: hidden;
+.download-title {
+    font-size: 28px;
+    color: #E50914;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    font-weight: bold;
+    letter-spacing: 2px;
 }
 
-/* Fondo oscuro encima de la imagen para mejorar el contraste */
-.banner::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6); /* Oscurecer la imagen */
-  z-index: 1;
+.download-description {
+    font-size: 18px;
+    margin-bottom: 25px;
 }
 
-/* Contenido centrado por encima */
-.banner-content {
-  position: relative;
-  z-index: 2;
-  color: white;
-}
-
-.banner-content h1 {
-  font-size: 48px;
-  margin: 0;
-  text-transform: uppercase;
-  color: #FE3477;
-  letter-spacing: 3px;
-}
-
-.banner-content p {
-  font-size: 20px;
-  margin: 15px 0 30px;
-}
-
-/* Botones */
-.banner-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
+.download-options {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }
 
 .download-button {
-  background-color: #FE3477;
-  color: black;
-  text-decoration: none;
-  font-weight: bold;
-  padding: 12px 24px;
-  border: 2px solid white;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
+    background-color: #FE3477;
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 12px 24px;
+    border: 2px solid white;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-transform: uppercase;
 }
 
 .download-button:hover {
-  background-color: white;
-  color: #FE3477;
-  border-color: #FE3477;
+    background-color: white;
+    color: #FE3477;
+    border-color: #FE3477;
 }
 
 .github-button {
-  background-color: transparent;
-  border: 2px solid #FE3477;
-  color: #FE3477;
+    background-color: transparent;
+    border: 2px solid #FE3477;
+    color: #FE3477;
 }
 
 .github-button:hover {
-  background-color: #FE3477;
-  color: black;
+    background-color: #FE3477;
+    color: black;
 }
 
-/* Secciones de contenido */
-.info-section {
-  background-color: #111; /* Gris oscuro para que contraste con el negro */
-  color: white;
-  padding: 60px 20px;
-  text-align: center;
-  border-top: 2px solid #FE3477; /* Línea superior para dividir cada sección */
-}
-
-.info-section h2 {
-  font-size: 32px;
-  color: #FE3477;
-  margin-bottom: 15px;
-  text-transform: uppercase;
-}
-
-.info-section p {
-  font-size: 18px;
-  line-height: 1.8;
-  max-width: 800px;
-  margin: 0 auto;
-  color: #f0f0f0;
-}
-
-.doc-link {
-  display: inline-block;
-  margin-top: 15px;
-  font-weight: bold;
-  color: #FE3477;
-  text-decoration: none;
-  border: 2px solid #FE3477;
-  padding: 8px 16px;
-  border-radius: 6px;
-  transition: all 0.3s ease;
-}
-
-.doc-link:hover {
-  background-color: #FE3477;
-  color: black;
+.download-section {
+    margin-top: 100px; /* Ajusta según el alto real de tu header */
 }
 
 .menu-spacer {
-  height: 80px; /* Ajusta según tu menú fijo */
+    height: 120px; /* O la altura exacta de tu header */
 }
