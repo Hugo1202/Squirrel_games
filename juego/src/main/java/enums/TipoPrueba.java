@@ -1,4 +1,6 @@
-package juego;
+package enums;
+
+import juego.Prueba;
 
 /**
  * La clase {@code TipoPrueba} representa los tipos de pruebas que se realizaran

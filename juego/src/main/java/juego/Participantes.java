@@ -59,9 +59,8 @@ public class Participantes extends Persona {
      * @param id, nos asegura que nos da un ID unico para cada infiltrado.
      */
 
-    public Participantes(String nombre, String apellidos, LocalDate fechaNacimiento, String sexo, String nacionalidad, double deudaAcumulada, String nombreFalso) {
+    public Participantes(String nombre, String apellidos, LocalDate fechaNacimiento, String sexo, String nacionalidad, String nombreFalso) {
         super(nombre, apellidos, fechaNacimiento, sexo, nacionalidad);
-        this.deudaAcumulada = deudaAcumulada;
         this.infiltrado = true;
         this.nombreFalso = nombreFalso;
         this.eliminado = false;
@@ -103,9 +102,9 @@ public class Participantes extends Persona {
     
     
     public void eliminar() throws InfiltradoNoEliminableException {
-//        if (infiltrado) {
-//            throw new InfiltradoNoEliminableException("No se puede eliminar a un jugador infiltrado.");
-//        }
+        if (infiltrado) {
+            throw new InfiltradoNoEliminableException("No se puede eliminar al jugador infiltrado " + this.getNombre() + ".");
+        }
         this.eliminado = true;
     }
 

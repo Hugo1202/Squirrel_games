@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import enums.TipoPrueba;
+import excepciones.InfiltradoNoEliminableException;
 import excepciones.InvalidSupervisorException;
 
 /**
@@ -99,20 +101,19 @@ public class Prueba {
 
 	public void simularPrueba(List<Participantes> participantes) {
 		setInscritos(participantes);
-//		try {
-//			setResponsable(responsable);
-//		} catch (InvalidSupervisorException e) {
-//			System.out.println("Error al asignar responsble: " + e.getMessage());
-//		}
 		double porcentajeEliminados = (Math.random() * (tipo.getMaxEliminados() - tipo.getMinEliminados())
 				+ tipo.getMinEliminados()) / 100.0;
 		int eliminadosObjetivo = (int) (inscritos.size() * porcentajeEliminados);
 		Collections.shuffle(inscritos);
 		for (int i = 0; i < eliminadosObjetivo; i++) {
-//            if (!inscritos.get(i).isEliminado()) {
-			inscritos.get(i).eliminar();
-			eliminados.add(inscritos.get(i));
-//            }
+
+			try {
+				inscritos.get(i).eliminar();
+				eliminados.add(inscritos.get(i));
+			} catch (InfiltradoNoEliminableException e) {
+				System.err.println(e.getMessage());
+			}
+
 		}
 		vencedores.addAll(inscritos);
 		vencedores.removeAll(eliminados);
