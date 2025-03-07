@@ -69,3 +69,6 @@ Squirrel_games/
 ---
 
 
+# Enlace a la página web Squirrel Games
+
+[Squirrel Games](https://hugo1202.github.io/Squirrel_games/) - ¡Juega ahora!
