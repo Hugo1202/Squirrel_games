@@ -130,7 +130,7 @@ public class Juego {
 	 */
 
 	public void jugarRonda(Managers responsable) {
-		if (pruebaActual < pruebas.size()) {
+		if (pruebaActual < pruebas.size() && getListaParticipantesVivos().size() > 1) {
 			try {
 				this.pruebas.get(pruebaActual).setResponsable(responsable);
 				responsable.setPruebaResponsable(this.pruebas.get(pruebaActual));
@@ -139,9 +139,10 @@ public class Juego {
 				this.boteTotal += this.pruebas.get(pruebaActual).getEliminados().size() * 10000;
 				pruebaActual++;
 			} catch (InvalidSupervisorException e) {
-				System.out.println("Error al asignar responsble: " + e.getMessage());
+				System.err.println("Error al asignar responsble: " + e.getMessage());
 			}
-
+		} else {
+			System.err.println("No se ajecuto ninguna prueba");
 		}
 	}
 

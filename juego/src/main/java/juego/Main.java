@@ -10,41 +10,6 @@ import excepciones.OrganizationException;
 
 public class Main {
 	public static void main(String[] args) throws OrganizationException {
-//		Juego game = new Juego("Oclajoma", LocalDate.of(2025, 2, 28), 10000.11);
-//		Participantes j1 = new Participantes("pollo", "peel", LocalDate.of(2000, 12, 28), "Ha", "Cakahuense", 700.7);
-//		Participantes j2 = new Participantes("patata", "peel", LocalDate.of(2000, 2, 29), "Ha", "Cakahuense", 700.7, "pepe");
-//		Participantes j3 = new Participantes("naranja", "peel", LocalDate.of(2000, 2, 29), "Ha", "Cakahuense", 700.7, "pepa");
-//		Participantes j4 = new Participantes("paja", "peel", LocalDate.of(2000, 12, 28), "Ha", "ohioyense", 700.7);
-//		Participantes j5 = new Participantes("caballo", "peel", LocalDate.of(2000, 12, 28), "Ha", "ohioyense", 700.7);
-//		Participantes j6 = new Participantes("cabra", "peel", LocalDate.of(2000, 12, 28), "Ha", "ohioyense", 700.7);
-//		Prueba p1 = new Prueba(TipoPrueba.LUZ_ROJA_LUZ_VERDE);
-//		Prueba p2 = new Prueba(TipoPrueba.DALGONA);
-//		Prueba p3 = new Prueba(TipoPrueba.TIRON_DE_CUERDA);
-//		//p3.eliminar();
-////		System.out.println(p1);
-////		System.out.println(p2);
-////		System.out.println(p3);
-//		game.agregarParticipante(j1);
-//		game.agregarParticipante(j2);
-//		game.agregarParticipante(j3);
-//		game.agregarParticipante(j4);
-//		game.agregarParticipante(j5);
-//		game.agregarParticipante(j6);
-//		game.agregarPrueba(p1);
-//		game.agregarPrueba(p2);
-//		game.agregarPrueba(p3);
-////		System.out.println(game);
-////		System.out.println(game.mostrarParticipantes());
-//		System.out.println(game.mostrarPruebas());
-//		game.jugarRonda();
-//		game.jugarRonda();
-//		game.jugarRonda();
-//		System.out.println(game.getPruebas().get(game.getPruebaAnterior()).getTipo().getDescripcion());
-////		System.out.println(game.mostrarParticipantes());
-////		System.out.println(game.mostrarParticipantesInfiltrados());
-//		System.out.println(game.getParticipantesMuertos());
-//		System.out.println(game.getParticipantesVivos());
-//		System.out.println(game.mostrarParticipantes());
 		Organization org = new Organization();
 
 		Managers m= new Managers("Manager1", 102, null);
@@ -69,13 +34,6 @@ public class Main {
             System.out.println("Error al registrar miembro: " + e.getMessage());
         }
         
-
-//        try {
-//            org.assignSupervisor(g1, g2);
-//            org.assignSupervisor(t1, m);
-//        } catch (OrganizationException e) {
-//            System.out.println("Error al asignar supervisor: " + e.getMessage());
-//        }
         
         org.addTeamMember(m, t1);
         org.addTeamMember(m, g1);
@@ -90,6 +48,17 @@ public class Main {
         
 
         Juego juego = new Juego("Isla Secreta", LocalDate.of(2025, 3, 6), 100000.00);
+        
+        Prueba prueba1 = new Prueba(TipoPrueba.LUZ_ROJA_LUZ_VERDE);
+        Prueba prueba2 = new Prueba(TipoPrueba.DALGONA);
+        Prueba prueba3 = new Prueba(TipoPrueba.TIRON_DE_CUERDA);
+
+        juego.agregarPrueba(prueba1);
+        juego.agregarPrueba(prueba2);
+        juego.agregarPrueba(prueba3);
+        
+        juego.jugarRonda(m2);
+        System.out.println(juego);
 
         Participantes j1 = new Participantes("pollo", "peel", LocalDate.of(2000, 12, 28), EnumSexo.FEMENINO, "Cakahuense", 700.7);
 		Participantes j2 = new Participantes("patata", "peel", LocalDate.of(2000, 2, 29), EnumSexo.MASCULINO, "Cakahuense", 302);
@@ -97,14 +66,6 @@ public class Main {
 		Participantes j4 = new Participantes("paja", "peel", LocalDate.of(2000, 12, 28), EnumSexo.MASCULINO, "ohioyense", 700.7);
 		Participantes j5 = new Participantes("caballo", "peel", LocalDate.of(2000, 12, 28), EnumSexo.MASCULINO, "ohioyense", 700.7);
 		Participantes j6 = new Participantes("cabra", "peel", LocalDate.of(2000, 12, 28), EnumSexo.MASCULINO, "ohioyense", 700.7);
-		
-//		m.addTeamMember(g1);
-//        m.addTeamMember(g2);
-//        m.addTeamMember(g3);
-//        m.addTeamMember(g4);
-//        m.addTeamMember(t1);
-//        m.addTeamMember(t2);
-//        m.addTeamMember(t3);
         
         juego.agregarTeam(m);
 
@@ -115,13 +76,7 @@ public class Main {
 		juego.agregarParticipante(j5);
 		juego.agregarParticipante(j6);
 
-        Prueba prueba1 = new Prueba(TipoPrueba.LUZ_ROJA_LUZ_VERDE);
-        Prueba prueba2 = new Prueba(TipoPrueba.DALGONA);
-        Prueba prueba3 = new Prueba(TipoPrueba.TIRON_DE_CUERDA);
-
-        juego.agregarPrueba(prueba1);
-        juego.agregarPrueba(prueba2);
-        juego.agregarPrueba(prueba3);
+        
 
         System.out.println("Estado inicial del juego:");
         System.out.println(juego);

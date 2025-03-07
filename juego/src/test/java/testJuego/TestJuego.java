@@ -38,9 +38,6 @@ public class TestJuego {
 		t2 = new Workers("Trabajador2", Department.DISTRIBUCION_DE_ALIMENTOS);
 		t3 = new Workers("Trabajador3", Department.PREPARACION_DE_JUEGOS);
 		
-		
-
-		game.agregarTeam(m);
 
 		j1 = new Participantes("pollo", "peel", LocalDate.of(2000, 12, 28), EnumSexo.MASCULINO, "Cakahuense", 700.7);
 		j2 = new Participantes("patata", "peel", LocalDate.of(2000, 2, 29), EnumSexo.MASCULINO, "Cakahuense", 700.7);
@@ -212,10 +209,21 @@ public class TestJuego {
 		assertEquals(LocalDate.of(2025, 2, 28), game.getFechaEvento(), "La fecha del evento no coincide");
 	}
 	
+	 @Test
+	    void testJugarRondaSinParticipantesVivos() {
+	        Juego newGame =  new Juego("Oclajoma", LocalDate.of(2025, 2, 28), 10000);
+	        newGame.jugarRonda(m);
+	        assertEquals(0, newGame.getPruebaActual());
+	        
+	        Prueba newPrueba = new Prueba(TipoPrueba.LUZ_ROJA_LUZ_VERDE);
+	        newGame.agregarPrueba(newPrueba);
+	        assertEquals(0, newGame.getPruebaActual());
+	    }
+	
 	@Test
     void testRegisterManager() throws OrganizationException {
-        	organization.registerManager(m);
-        	organization.registerManager(m2);
+        organization.registerManager(m);
+        organization.registerManager(m2);
         assertTrue(organization.getMembers().contains(m));
         assertTrue(organization.getMembers().contains(m2));
     }
