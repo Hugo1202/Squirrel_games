@@ -1,0 +1,230 @@
+body {
+    height: 800vh;
+    background: black;
+    margin: 0;
+    /* El overflow se controla mediante la clase */
+  }
+
+  #contenido {
+    display: none;
+    background-color: white;
+    /* Deja espacio para el menú fijo (ajusta según el alto de tu menú) */
+    padding-top: 80px; 
+    padding-left: 20px;
+    padding-right: 20px;
+  
+    /* Para no extenderse a lo ancho infinito */
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  body, html {
+    margin: 0;
+    padding: 0;
+  }
+  
+
+
+  /* El header se fija arriba, ocupa 100% de ancho */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: #000;  /* Color de fondo */
+    z-index: 1000;     /* Para estar por encima del contenido */
+  }
+  
+  /* El contenedor del menú, centrado y con ancho máximo */
+  .top-menu {
+    max-width: 1200px; /* Ajusta a tu gusto */
+    margin: 0 auto;    /* Centra horizontalmente */
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    color: #fff;
+  }
+  
+  .no-scroll {
+    overflow: hidden;
+  }
+  /* Logo (izquierda) */
+  .top-menu .logo a {
+    color: #FE3477; /* Acento rojo estilo Squid Game */
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  
+  /* Menú principal (derecha) */
+  .top-menu .menu {
+    list-style: none;
+    display: flex;
+    margin-left: auto; /* Empuja el menú a la derecha */
+  }
+  .top-menu .menu li {
+    margin-left: 0;
+    list-style: none;
+    width: 100%;
+  }
+  
+  .top-menu .menu li {
+    position: relative;
+    margin-left: 20px;
+  }
+  
+  
+  .top-menu .menu li a {
+    text-decoration: none;
+    color: #fff;
+    padding: 8px 12px;
+    display: block;
+    transition: background-color 0.3s;
+  }
+  
+  .top-menu .menu li a:hover {
+    background-color: #FE3477;
+    border-radius: 4px;
+  }
+  
+ /* Submenú (dropdown) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #000;
+  min-width: 150px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  z-index: 1;
+  /* Evita cualquier margen interno extra */
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-content li {
+  list-style: none;     /* Quita bullets */
+  margin: 0;            /* Quita márgenes */
+  padding: 0;           /* Quita padding */
+  width: auto;          /* Evita que se expanda todo el ancho */
+}
+
+.dropdown-content li a {
+  padding: 10px;
+  display: block;       /* Asegura que ocupe todo el ancho del contenedor */
+}
+
+/* Al pasar el mouse sobre .dropdown, muestra .dropdown-content */
+.dropdown:hover .dropdown-content {
+  display: block;
+}  
+  
+  /* Para pantallas de hasta 768px de ancho */
+@media screen and (max-width: 768px) {
+  /* El contenedor del menú se vuelve columna */
+  .top-menu {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  /* El logo se separa del menú */
+  .top-menu .logo {
+    margin-bottom: 10px;
+  }
+
+  /* El menú principal ahora en columna */
+  .top-menu .menu {
+    flex-direction: column;
+    margin-left: 0;
+  }
+
+  /* Quita el margin-left de los <li> */
+  .top-menu .menu li {
+    margin-left: 0;
+  }
+
+  /* Ajusta el submenú para que se muestre de manera vertical */
+  .dropdown-content {
+    position: static;  /* No flotante */
+    box-shadow: none;  /* Sin sombra */
+    background-color: #000;
+  }
+
+  .dropdown-content li a {
+    padding: 10px 0;
+  }
+
+  /* Muestra el submenú directamente */
+  .dropdown:hover .dropdown-content {
+    display: block;
+    margin-top: 0;
+  }
+}
+
+.doc-section {
+    background-color: black;
+    color: white;
+    border: 2px solid #E50914;
+    padding: 30px;
+    text-align: center;
+    margin: 20px 0;
+    border-radius: 12px;
+}
+
+.download-title {
+    font-size: 28px;
+    color: #E50914;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.download-description {
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+.download-options {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.download-button {
+    background-color: #FE3477;
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 12px 24px;
+    border: 2px solid white;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+.download-button:hover {
+    background-color: white;
+    color: #FE3477;
+    border-color: #FE3477;
+}
+
+.github-button {
+    background-color: transparent;
+    border: 2px solid #FE3477;
+    color: #FE3477;
+}
+
+.github-button:hover {
+    background-color: #FE3477;
+    color: black;
+}
+
+.download-section {
+    margin-top: 100px; /* Ajusta según el alto real de tu header */
+}
+
+.menu-spacer {
+    height: 120px; /* O la altura exacta de tu header */
+}
