@@ -19,7 +19,6 @@ public class Workers extends PinkGuards {
 	 * @param supervisor Supervisor asignado
 	 * @throws InvalidSupervisorException si rango Supervisor es igual o menor a Worker
 	 */
-	public Workers(String name, Department department, PinkGuards supervisor) throws InvalidSupervisorException {
 
 	public Workers(String name, Department department) {
 		super(name);

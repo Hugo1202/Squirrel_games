@@ -24,7 +24,6 @@ public class Soldiers extends PinkGuards {
 	 * @param supervisor supervisor asignado
 	 * @throws InvalidSupervisorException si rango Supervisor es igual o menor a Soldier
 	 */
-	public Soldiers(String name, WeaponType weapon, int munition, PinkGuards supervisor) throws InvalidSupervisorException {
 
 	public Soldiers(String name, WeaponType weapon, int munition) {
 		super(name);
