@@ -2,6 +2,8 @@ package juego;
 
 import java.time.LocalDate;
 
+import enums.EnumSexo;
+
 
 /**
  * La clase {@code Persona} representa la estructura básica que deben de tener todas
@@ -14,11 +16,11 @@ import java.time.LocalDate;
 
 
 public abstract class Persona {
-    private String nombre;
-    private String apellidos;
-    private LocalDate fechaNacimiento;
-    private String sexo;
-    private String nacionalidad;
+    protected String nombre;
+    protected String apellidos;
+    protected LocalDate fechaNacimiento;
+    protected EnumSexo sexo;
+    protected String nacionalidad;
 
 
 /**
@@ -30,7 +32,7 @@ public abstract class Persona {
  * @param sexo de la persona.
  * @param nacionalidad de la persona.
  */
-    public Persona(String nombre, String apellidos, LocalDate fechaNacimiento, String sexo, String nacionalidad) {
+    public Persona(String nombre, String apellidos, LocalDate fechaNacimiento, EnumSexo sexo, String nacionalidad) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.fechaNacimiento = fechaNacimiento;
@@ -52,7 +54,7 @@ public abstract class Persona {
         return fechaNacimiento;
     }
 
-    public String getSexo() {
+    public EnumSexo getSexo() {
         return sexo;
     }
 

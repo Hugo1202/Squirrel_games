@@ -3,6 +3,7 @@ package juego;
 import java.time.LocalDate;
 
 import enums.Department;
+import enums.EnumSexo;
 import enums.TipoPrueba;
 import enums.WeaponType;
 import excepciones.OrganizationException;
@@ -90,12 +91,12 @@ public class Main {
 
         Juego juego = new Juego("Isla Secreta", LocalDate.of(2025, 3, 6), 100000.00);
 
-        Participantes j1 = new Participantes("pollo", "peel", LocalDate.of(2000, 12, 28), "Ha", "Cakahuense", 700.7);
-		Participantes j2 = new Participantes("patata", "peel", LocalDate.of(2000, 2, 29), "Ha", "Cakahuense", 302);
-		Participantes j3 = new Participantes("naranja", "peel", LocalDate.of(2000, 2, 29), "Ha", "Cakahuense", 22);
-		Participantes j4 = new Participantes("paja", "peel", LocalDate.of(2000, 12, 28), "Ha", "ohioyense", 700.7);
-		Participantes j5 = new Participantes("caballo", "peel", LocalDate.of(2000, 12, 28), "Ha", "ohioyense", 700.7);
-		Participantes j6 = new Participantes("cabra", "peel", LocalDate.of(2000, 12, 28), "Ha", "ohioyense", 700.7);
+        Participantes j1 = new Participantes("pollo", "peel", LocalDate.of(2000, 12, 28), EnumSexo.FEMENINO, "Cakahuense", 700.7);
+		Participantes j2 = new Participantes("patata", "peel", LocalDate.of(2000, 2, 29), EnumSexo.MASCULINO, "Cakahuense", 302);
+		Participantes j3 = new Participantes("naranja", "peel", LocalDate.of(2000, 2, 29), EnumSexo.MASCULINO, "Cakahuense", 22);
+		Participantes j4 = new Participantes("paja", "peel", LocalDate.of(2000, 12, 28), EnumSexo.MASCULINO, "ohioyense", 700.7);
+		Participantes j5 = new Participantes("caballo", "peel", LocalDate.of(2000, 12, 28), EnumSexo.MASCULINO, "ohioyense", 700.7);
+		Participantes j6 = new Participantes("cabra", "peel", LocalDate.of(2000, 12, 28), EnumSexo.MASCULINO, "ohioyense", 700.7);
 		
 //		m.addTeamMember(g1);
 //        m.addTeamMember(g2);
