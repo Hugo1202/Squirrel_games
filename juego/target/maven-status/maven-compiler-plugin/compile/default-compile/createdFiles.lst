@@ -1,0 +1,17 @@
+juego\Juego.class
+juego\Soldiers.class
+enums\WeaponType.class
+excepciones\InvalidSupervisorException.class
+juego\Prueba.class
+enums\Department.class
+juego\Persona.class
+juego\Main.class
+excepciones\InfiltradoNoEliminableException.class
+juego\Managers.class
+juego\PinkGuards.class
+juego\Workers.class
+enums\EnumSexo.class
+juego\Participantes.class
+juego\Organization.class
+enums\TipoPrueba.class
+excepciones\OrganizationException.class
