@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Workers.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestJuego (7 mar 2025 19:55:29)</a> &gt; <a href="../../index.html" class="el_group">juego</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">juego</a> &gt; <span class="el_source">Workers.java</span></div><h1>Workers.java</h1><pre class="source lang-java linenums">package juego;
+
+import java.util.Objects;
+
+import enums.Department;
+import excepciones.InvalidSupervisorException;
+
+public class Workers extends PinkGuards {
+	private Department department;
+	private PinkGuards supervisor;
+
+	public Workers(String name, Department department) {
+<span class="fc" id="L13">		super(name);</span>
+<span class="fc" id="L14">		this.department = department;</span>
+<span class="fc" id="L15">	}</span>
+
+	public Department getDepartment() {
+<span class="nc" id="L18">		return department;</span>
+	}
+
+	public void setDepartment(Department department) {
+<span class="nc" id="L22">		this.department = department;</span>
+<span class="nc" id="L23">	}</span>
+
+	public PinkGuards getSupervisor() {
+<span class="nc" id="L26">		return supervisor;</span>
+	}
+
+	public void setSupervisor(PinkGuards supervisor) throws InvalidSupervisorException {
+<span class="nc bnc" id="L30" title="All 2 branches missed.">		if (supervisor == null) {</span>
+<span class="nc" id="L31">			this.supervisor = null;</span>
+<span class="nc" id="L32">		} else {</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">			if (supervisor.getRank() &lt;= this.getRank()) {</span>
+<span class="nc" id="L34">				throw new InvalidSupervisorException(&quot;Supervisor debe tener mayor rango que Worker.&quot;);</span>
+			}
+<span class="nc" id="L36">			this.supervisor = supervisor;</span>
+		}
+<span class="nc" id="L38">	}</span>
+
+	@Override
+	public int getRank() {
+<span class="nc" id="L42">		return 1;</span>
+	}
+
+	@Override
+    public String toString() {
+<span class="nc" id="L47">		String info = &quot;Worker | Nombre: %s | Departamento: %s&quot;;</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">		 if (supervisor != null) {</span>
+<span class="nc" id="L49">	            info += &quot; | Supervisor: %s&quot;;</span>
+<span class="nc" id="L50">	            return String.format(info, name, department, supervisor.name);</span>
+	        }
+<span class="nc" id="L52">	        return String.format(info, name, department);</span>
+    }
+
+	@Override
+	public boolean equals(Object o) {
+<span class="nc bnc" id="L57" title="All 2 branches missed.">		if (this == o)</span>
+<span class="nc" id="L58">			return true;</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">		if (!(o instanceof Workers))</span>
+<span class="nc" id="L60">			return false;</span>
+<span class="nc" id="L61">		Workers workers = (Workers) o;</span>
+<span class="nc bnc" id="L62" title="All 4 branches missed.">		return department == workers.department &amp;&amp; Objects.equals(getName(), workers.getName())</span>
+<span class="nc bnc" id="L63" title="All 2 branches missed.">				&amp;&amp; Objects.equals(supervisor, workers.supervisor);</span>
+	}
+
+	@Override
+	public int hashCode() {
+<span class="nc" id="L68">		return Objects.hash(getName(), department, supervisor);</span>
+	}
+
+	@Override
+	protected boolean contains(PinkGuards members) {
+		// TODO Auto-generated method stub
+<span class="nc" id="L74">		return false;</span>
+	}
+
+	@Override
+	protected void add(PinkGuards members) {
+		// TODO Auto-generated method stub
+		
+<span class="nc" id="L81">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span>TestJuego (7 mar 2025 19:55:29)</div></body></html>

@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Juego.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestJuego (7 mar 2025 19:55:29)</a> &gt; <a href="../../index.html" class="el_group">juego</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">juego</a> &gt; <span class="el_source">Juego.java</span></div><h1>Juego.java</h1><pre class="source lang-java linenums">package juego;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import excepciones.InvalidSupervisorException;
+
+/**
+ * La clase {@code Juego} es la clase principal del proyecto.
+ * 
+ * &lt;p&gt;
+ * La clase juego es la que se encarga de unir todas las demas clases para
+ * realizar la simulación del juego.
+ * &lt;/p&gt;
+ * 
+ * 
+ * @version 1.0
+ * @see Prueba.java
+ * @see Participantes
+ */
+
+public class Juego {
+	private String ubicacion;
+	private LocalDate fechaEvento;
+	private List&lt;Participantes&gt; participantes;
+	private List&lt;List&lt;PinkGuards&gt;&gt; guardias;
+	private List&lt;Prueba&gt; pruebas;
+<span class="fc" id="L29">	private int pruebaActual = 0;</span>
+	private double boteTotal;
+
+	/**
+	 * Obtener la información de las caracteristicas del juego.
+	 *
+	 *
+	 * @param ubicacion   donde se realizaran los juegos.
+	 * @param fechaEvento cuando se realizara el juego.
+	 * @param boteInicial dinero acumulado en el juego.
+	 */
+<span class="fc" id="L40">	public Juego(String ubicacion, LocalDate fechaEvento, double boteInicial) {</span>
+<span class="fc" id="L41">		this.participantes = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L42">		this.pruebas = new ArrayList&lt;Prueba&gt;();</span>
+<span class="fc" id="L43">		this.guardias = new ArrayList&lt;List&lt;PinkGuards&gt;&gt;();</span>
+<span class="fc" id="L44">		this.ubicacion = ubicacion;</span>
+<span class="fc" id="L45">		this.fechaEvento = fechaEvento;</span>
+<span class="fc" id="L46">		this.boteTotal = boteInicial;</span>
+<span class="fc" id="L47">	}</span>
+
+	public List&lt;Participantes&gt; getParticipantes() {
+<span class="fc" id="L50">		return participantes;</span>
+	}
+
+	public List&lt;List&lt;PinkGuards&gt;&gt; getGuardias() {
+<span class="nc" id="L54">		return guardias;</span>
+	}
+
+	public double getBoteTotal() {
+<span class="fc" id="L58">		return this.boteTotal;</span>
+	}
+
+	public String getUbicacion() {
+<span class="fc" id="L62">		return ubicacion;</span>
+	}
+
+	public LocalDate getFechaEvento() {
+<span class="fc" id="L66">		return fechaEvento;</span>
+	}
+
+	public int getPruebaActual() {
+<span class="fc" id="L70">		return pruebaActual;</span>
+	}
+
+	public int getPruebaAnterior() {
+<span class="fc bfc" id="L74" title="All 2 branches covered.">		if (this.pruebaActual &gt; 0) {</span>
+<span class="fc" id="L75">			return pruebaActual - 1;</span>
+		} else {
+<span class="fc" id="L77">			System.out.println(&quot;no hay prueba anterior&quot;);</span>
+		}
+<span class="fc" id="L79">		return pruebaActual;</span>
+	}
+
+	public int getPruebaSiguiente() {
+<span class="fc bfc" id="L83" title="All 2 branches covered.">		if (this.pruebaActual &lt; this.pruebas.size()) {</span>
+<span class="fc" id="L84">			return pruebaActual + 1;</span>
+		} else {
+<span class="fc" id="L86">			System.out.println(&quot;no hay prueba siguiente&quot;);</span>
+		}
+<span class="fc" id="L88">		return pruebaActual;</span>
+	}
+
+	public void setPruebaActual(int newPruebaActual) {
+<span class="fc" id="L92">		this.pruebaActual = newPruebaActual;</span>
+<span class="fc" id="L93">	}</span>
+
+	public List&lt;Prueba&gt; getPruebas() {
+<span class="fc" id="L96">		return pruebas;</span>
+	}
+
+	public void agregarParticipante(Participantes p) {
+<span class="fc" id="L100">		this.participantes.add(p);</span>
+<span class="fc" id="L101">	}</span>
+
+	public void agregarPrueba(Prueba p) {
+<span class="fc" id="L104">		this.pruebas.add(p);</span>
+<span class="fc" id="L105">	}</span>
+
+	public void agregarTeam(Managers m) {
+<span class="nc" id="L108">		this.guardias.add(m.getTeam());</span>
+<span class="nc" id="L109">	}</span>
+
+	/**
+	 * Simula la ejecución de una ronda de juego.
+	 * 
+	 * En cada ronda, se simula una prueba utilizando la lista de participantes
+	 * vivos. Además, por cada participante eliminado en la prueba, se suman 10.000
+	 * € al bote total.
+	 * 
+	 * El flujo es:
+	 * &lt;ol&gt;
+	 * &lt;li&gt;Se comprueba si quedan pruebas por jugar, comparando
+	 * &lt;code&gt;pruebaActual&lt;/code&gt; con el tamaño de la lista de pruebas.&lt;/li&gt;
+	 * &lt;li&gt;Si hay pruebas pendientes, se ejecuta la prueba actual llamando a
+	 * &lt;code&gt;simularPrueba()&lt;/code&gt;, pasándole la lista de participantes vivos.&lt;/li&gt;
+	 * &lt;li&gt;Se calcula el dinero que se añade al bote: 10.000 por cada eliminado en
+	 * la prueba.&lt;/li&gt;
+	 * &lt;li&gt;Se incrementa el contador &lt;code&gt;pruebaActual&lt;/code&gt; para avanzar a la
+	 * siguiente ronda.&lt;/li&gt;
+	 * &lt;/ol&gt;
+	 * 
+	 */
+
+	public void jugarRonda(Managers responsable) {
+<span class="pc bpc" id="L133" title="1 of 4 branches missed.">		if (pruebaActual &lt; pruebas.size() &amp;&amp; getListaParticipantesVivos().size() &gt; 1) {</span>
+			try {
+<span class="fc" id="L135">				this.pruebas.get(pruebaActual).setResponsable(responsable);</span>
+<span class="fc" id="L136">				responsable.setPruebaResponsable(this.pruebas.get(pruebaActual));</span>
+<span class="fc" id="L137">				System.out.println(&quot;\nSimulando Rondas...&quot;);</span>
+<span class="fc" id="L138">				this.pruebas.get(pruebaActual).simularPrueba(getListaParticipantesVivos());</span>
+<span class="fc" id="L139">				this.boteTotal += this.pruebas.get(pruebaActual).getEliminados().size() * 10000;</span>
+<span class="fc" id="L140">				pruebaActual++;</span>
+<span class="pc" id="L141">			} catch (InvalidSupervisorException e) {</span>
+<span class="nc" id="L142">				System.err.println(&quot;Error al asignar responsble: &quot; + e.getMessage());</span>
+			}
+<span class="nc" id="L144">		} else {</span>
+<span class="fc" id="L145">			System.err.println(&quot;No se ajecuto ninguna prueba&quot;);</span>
+		}
+<span class="fc" id="L147">	}</span>
+
+	@Override
+	public String toString() {
+<span class="nc" id="L151">		String info = &quot;&quot;&quot;</span>
+				Ubicacion: %s
+				Fecha del evento: %s
+				Numero de participantes: %d
+				Numero de ronda: %d / %d
+				Bote total: %.2f
+				&quot;&quot;&quot;;
+<span class="nc" id="L158">		return String.format(info, this.ubicacion, this.fechaEvento, this.participantes.size(), this.pruebaActual,</span>
+<span class="nc" id="L159">				this.pruebas.size(), this.boteTotal);</span>
+	}
+
+	/**
+	 * Devuelve la información de todos los participantes.
+	 * 
+	 * Este método recorre la lista de participantes y muestra la información de
+	 * cada uno. El flujo es:
+	 * &lt;ol&gt;
+	 * &lt;li&gt;Se crea un String vacío llamado 'info'.&lt;/li&gt;
+	 * &lt;li&gt;Se recorre la lista completa de participantes usando un bucle for.&lt;/li&gt;
+	 * &lt;li&gt;En cada iteración, se añade la información del participante al String
+	 * 'info'.&lt;/li&gt;
+	 * &lt;li&gt;Cada participante se añade seguido de un salto de línea.&lt;/li&gt;
+	 * &lt;li&gt;Al finalizar el bucle, se devuelve el String completo con la información
+	 * de todos los participantes.&lt;/li&gt;
+	 * &lt;/ol&gt;
+	 * 
+	 * @return Un String con la información de todos los participantes.
+	 */
+
+	public String mostrarParticipantes() {
+<span class="nc" id="L181">		String info = &quot;&quot;;</span>
+<span class="nc bnc" id="L182" title="All 2 branches missed.">		for (int i = 0; i &lt; this.participantes.size(); i++) {</span>
+<span class="nc" id="L183">			info += this.participantes.get(i) + &quot;\n&quot;;</span>
+		}
+<span class="nc" id="L185">		return info;</span>
+	}
+
+	/**
+	 * Devuelve la información de los participantes que siguen vivos (no
+	 * eliminados).
+	 * 
+	 * Este método recorre la lista de participantes y verifica si el participante
+	 * no haya sido eliminado.
+	 * 
+	 * El flujo es:
+	 * &lt;ol&gt;
+	 * &lt;li&gt;Se crea un String llamado 'vivos' con el texto inicial &quot;Participantes
+	 * sobrevivientes:&quot;.&lt;/li&gt;
+	 * &lt;li&gt;Se recorre la lista completa de participantes usando un bucle
+	 * for-each.&lt;/li&gt;
+	 * &lt;li&gt;En cada iteración, se comprueba si el participante no está eliminado con
+	 * &lt;code&gt;isEliminado()&lt;/code&gt; de la clase {@code Participantes}.&lt;/li&gt;
+	 * &lt;li&gt;Si no está eliminado, se añade su información al String 'vivos'.&lt;/li&gt;
+	 * &lt;li&gt;Al finalizar el bucle, se devuelve el String completo con la información
+	 * de todos los participantes vivos.&lt;/li&gt;
+	 * &lt;/ol&gt;
+	 * 
+	 * @return Un String con la información de los participantes sobrevivientes.
+	 */
+
+	public String getParticipantesVivos() {
+<span class="fc" id="L212">		String vivos = &quot;Participantes sobrevivientes&quot; + &quot;: \n&quot;;</span>
+<span class="fc bfc" id="L213" title="All 2 branches covered.">		for (Participantes p : participantes) {</span>
+<span class="fc bfc" id="L214" title="All 2 branches covered.">			if (!p.isEliminado()) {</span>
+<span class="fc" id="L215">				vivos += p + &quot;\n&quot;;</span>
+			}
+		}
+<span class="fc" id="L218">		return vivos;</span>
+	}
+
+	/**
+	 * Devuelve la información de los participantes que han sido eliminados.
+	 * 
+	 * Este método recorre la lista de participantes y verifica si han sido
+	 * eliminados.
+	 * 
+	 * El flujo es:
+	 * &lt;ol&gt;
+	 * &lt;li&gt;Se crea un String llamado 'muertos' con el texto inicial &quot;Participantes
+	 * eliminados:&quot;.&lt;/li&gt;
+	 * &lt;li&gt;Se recorre la lista completa de participantes usando un bucle
+	 * for-each.&lt;/li&gt;
+	 * &lt;li&gt;En cada iteración, se comprueba si el participante está eliminado con
+	 * &lt;code&gt;isEliminado()&lt;/code&gt; de la clase {@code Participantes}.&lt;/li&gt;
+	 * &lt;li&gt;Si está eliminado, se añade su información al String 'muertos'.&lt;/li&gt;
+	 * &lt;li&gt;Al finalizar el bucle, se devuelve el String completo con la información
+	 * de todos los eliminados.&lt;/li&gt;
+	 * &lt;/ol&gt;
+	 * 
+	 * @return Un String con la información de los participantes eliminados.
+	 */
+
+	public String getParticipantesMuertos() {
+<span class="fc" id="L244">		String muertos = &quot;Participantes eliminados: \n&quot;;</span>
+<span class="fc bfc" id="L245" title="All 2 branches covered.">		for (Participantes p : participantes) {</span>
+<span class="fc bfc" id="L246" title="All 2 branches covered.">			if (p.isEliminado()) {</span>
+<span class="fc" id="L247">				muertos += p + &quot;\n&quot;;</span>
+			}
+		}
+<span class="fc" id="L250">		return muertos;</span>
+	}
+
+	/**
+	 * Devuelve una lista con los participantes que siguen vivos (no eliminados).
+	 * 
+	 * Este método recorre la lista de participantes y filtra aquellos que no han
+	 * sido eliminados,
+	 * 
+	 * El flujo es:
+	 * &lt;ol&gt;
+	 * &lt;li&gt;Se crea una lista vacía llamada 'vivos'.&lt;/li&gt;
+	 * &lt;li&gt;Se recorre la lista completa de participantes usando un bucle
+	 * for-each.&lt;/li&gt;
+	 * &lt;li&gt;En cada iteración, se comprueba si el participante no está eliminado con
+	 * &lt;code&gt;isEliminado()&lt;/code&gt; de la clase {@code Participantes}.&lt;/li&gt;
+	 * &lt;li&gt;Si no está eliminado, se añade a la lista 'vivos'.&lt;/li&gt;
+	 * &lt;li&gt;Al finalizar el bucle, se devuelve la lista 'vivos', que contiene solo
+	 * los participantes que no han sido eliminados.&lt;/li&gt;
+	 * &lt;/ol&gt;
+	 * 
+	 * @return Una lista de los participantes que siguen vivos (no eliminados).
+	 */
+
+	public List&lt;Participantes&gt; getListaParticipantesVivos() {
+<span class="fc" id="L275">		List&lt;Participantes&gt; vivos = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L276" title="All 2 branches covered.">		for (Participantes p : participantes) {</span>
+<span class="fc bfc" id="L277" title="All 2 branches covered.">			if (!p.isEliminado()) {</span>
+<span class="fc" id="L278">				vivos.add(p);</span>
+			}
+		}
+<span class="fc" id="L281">		return vivos;</span>
+	}
+
+	/**
+	 * Muestra la lista de participantes infiltrados.
+	 * 
+	 * Este método recorre la lista de participantes y muestra la información de los
+	 * participantes infiltrados.
+	 * 
+	 * El flujo es:
+	 * &lt;ol&gt;
+	 * &lt;li&gt;Se inicializa un String llamado 'info' con el encabezado &quot;Participantes
+	 * infiltrados:&quot;.&lt;/li&gt;
+	 * &lt;li&gt;Se recorre la lista de participantes usando un bucle for.&lt;/li&gt;
+	 * &lt;li&gt;En cada iteración, se verifica si el participante es infiltrado llamando
+	 * a &lt;code&gt;isInfiltrado()&lt;/code&gt; de la clase {@code Participantes}&lt;/li&gt;
+	 * &lt;li&gt;Si es infiltrado, se añade al String 'info', seguido de un salto de
+	 * línea.&lt;/li&gt;
+	 * &lt;li&gt;Al finalizar el bucle, se devuelve el String completo con los infiltrados
+	 * encontrados.&lt;/li&gt;
+	 * &lt;/ol&gt;
+	 * 
+	 * @return Un String con la lista de participantes infiltrados.
+	 */
+
+	public String mostrarParticipantesInfiltrados() {
+<span class="nc" id="L307">		String info = &quot;Participantes infiltrados: \n&quot;;</span>
+<span class="nc bnc" id="L308" title="All 2 branches missed.">		for (int i = 0; i &lt; this.participantes.size(); i++) {</span>
+<span class="nc bnc" id="L309" title="All 2 branches missed.">			if (this.participantes.get(i).isInfiltrado()) {</span>
+<span class="nc" id="L310">				info += this.participantes.get(i) + &quot;\n&quot;;</span>
+			}
+		}
+<span class="nc" id="L313">		return info;</span>
+	}
+
+	/**
+	 * Genera y devuelve un listado de todas las pruebas registradas.
+	 * 
+	 * Este método recorre la lista de pruebas de la clase y devuelve cada prueba y
+	 * su descripción.
+	 * 
+	 * El flujo es:
+	 * &lt;ol&gt;
+	 * &lt;li&gt;Se inicializa una cadena vacía llamada 'info'.&lt;/li&gt;
+	 * &lt;li&gt;Se recorre la lista de pruebas utilizando un bucle for.&lt;/li&gt;
+	 * &lt;li&gt;En cada iteración, se obtiene el tipo de la prueba y su descripción.&lt;/li&gt;
+	 * &lt;li&gt;Se concatena esta información a la cadena 'info', seguido de un salto de
+	 * línea.&lt;/li&gt;
+	 * &lt;li&gt;Al finalizar el bucle, se devuelve el String completo con la información
+	 * de todas las pruebas.&lt;/li&gt;
+	 * &lt;/ol&gt;
+	 * 
+	 * @return Un String con el listado de todas las pruebas y sus descripciones.
+	 */
+
+	public String mostrarPruebas() {
+<span class="fc" id="L337">		String info = &quot;&quot;;</span>
+<span class="fc bfc" id="L338" title="All 2 branches covered.">		for (int i = 0; i &lt; this.pruebas.size(); i++) {</span>
+<span class="fc" id="L339">			info += this.pruebas.get(i).getTipo() + &quot;: &quot; + this.pruebas.get(i).getTipo().getDescripcion() + &quot;\n&quot;;</span>
+<span class="pc bpc" id="L340" title="1 of 2 branches missed.">			if (this.pruebas.get(i).getResponsable() != null) {</span>
+<span class="nc" id="L341">				info += &quot;Con reponsable: &quot; + this.pruebas.get(i).getResponsable().getName() + &quot;\n&quot;;</span>
+			}
+		}
+<span class="fc" id="L344">		return info;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span>TestJuego (7 mar 2025 19:55:29)</div></body></html>

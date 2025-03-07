@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>TestJuego.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestJuego (7 mar 2025 19:55:29)</a> &gt; <a href="../../index.html" class="el_group">juego</a> &gt; <a href="../index.html" class="el_bundle">src/test/java</a> &gt; <a href="index.source.html" class="el_package">testJuego</a> &gt; <span class="el_source">TestJuego.java</span></div><h1>TestJuego.java</h1><pre class="source lang-java linenums">package testJuego;
+
+import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import enums.*;
+import excepciones.*;
+import juego.*;
+
+<span class="fc" id="L16">public class TestJuego {</span>
+	private static Juego game;
+	private static Organization organization;
+	private static Participantes j1, j2, j3, j4, j5, j6, j7, j8, j9, j10;
+	private static Prueba p1, p2, p3;
+	private static Managers m, m2;
+	private static Soldiers g1, g2, g3, g4;
+	private static Workers t1, t2, t3;
+
+	@BeforeEach
+	public void SetUp() {
+<span class="fc" id="L27">		System.out.println(&quot;Inicializando recursos compartidos para todas las pruebas.&quot;);</span>
+<span class="fc" id="L28">		game = new Juego(&quot;Oclajoma&quot;, LocalDate.of(2025, 2, 28), 10000);</span>
+<span class="fc" id="L29">		organization = new Organization();</span>
+
+<span class="fc" id="L31">		m = new Managers(&quot;Manager1&quot;, 102, null);</span>
+<span class="fc" id="L32">		m2 = new Managers(&quot;Manager2&quot;, 102, null);</span>
+<span class="fc" id="L33">		g1 = new Soldiers(&quot;Guardia1&quot;, WeaponType.PISTOLA_GLOCK_17, 100);</span>
+<span class="fc" id="L34">		g2 = new Soldiers(&quot;Guardia2&quot;, WeaponType.RIFLE_AUTOMATICO_HECKLER_Y_KOCH_G3, 80);</span>
+<span class="fc" id="L35">		g3 = new Soldiers(&quot;Guardia3&quot;, WeaponType.PISTOLA_GLOCK_17, 100);</span>
+<span class="fc" id="L36">		g4 = new Soldiers(&quot;Guardia4&quot;, WeaponType.RILE_DE_ASALTO_HECKLER_Y_KOCH_MP5, 80);</span>
+<span class="fc" id="L37">		t1 = new Workers(&quot;Trabajador1&quot;, Department.LIMPIEZA_DE_ELIMINADOS);</span>
+<span class="fc" id="L38">		t2 = new Workers(&quot;Trabajador2&quot;, Department.DISTRIBUCION_DE_ALIMENTOS);</span>
+<span class="fc" id="L39">		t3 = new Workers(&quot;Trabajador3&quot;, Department.PREPARACION_DE_JUEGOS);</span>
+		
+
+<span class="fc" id="L42">		j1 = new Participantes(&quot;pollo&quot;, &quot;peel&quot;, LocalDate.of(2000, 12, 28), EnumSexo.MASCULINO, &quot;Cakahuense&quot;, 700.7);</span>
+<span class="fc" id="L43">		j2 = new Participantes(&quot;patata&quot;, &quot;peel&quot;, LocalDate.of(2000, 2, 29), EnumSexo.MASCULINO, &quot;Cakahuense&quot;, 700.7);</span>
+<span class="fc" id="L44">		j3 = new Participantes(&quot;naranja&quot;, &quot;peel&quot;, LocalDate.of(2000, 2, 29), EnumSexo.MASCULINO, &quot;Cakahuense&quot;, 700.7);</span>
+<span class="fc" id="L45">		j4 = new Participantes(&quot;paja&quot;, &quot;peel&quot;, LocalDate.of(2000, 12, 28), EnumSexo.MASCULINO, &quot;ohioyense&quot;, 700.7);</span>
+<span class="fc" id="L46">		j5 = new Participantes(&quot;caballo&quot;, &quot;peel&quot;, LocalDate.of(2000, 12, 28), EnumSexo.MASCULINO, &quot;ohioyense&quot;, 700.7);</span>
+<span class="fc" id="L47">		j6 = new Participantes(&quot;cabra&quot;, &quot;peel&quot;, LocalDate.of(2000, 12, 28), EnumSexo.MASCULINO, &quot;ohioyense&quot;, 700.7);</span>
+<span class="fc" id="L48">		j7 = new Participantes(&quot;Jugador 1&quot;, &quot;Uno&quot;, LocalDate.of(1995, 1, 1), EnumSexo.MASCULINO, &quot;España&quot;, 500);</span>
+<span class="fc" id="L49">		j8 = new Participantes(&quot;Jugador 2&quot;, &quot;Dos&quot;, LocalDate.of(1996, 2, 2), EnumSexo.FEMENINO, &quot;México&quot;, 600);</span>
+<span class="fc" id="L50">		j9 = new Participantes(&quot;Jugador 3&quot;, &quot;Tres&quot;, LocalDate.of(1997, 3, 3), EnumSexo.FEMENINO, &quot;Argentina&quot;, 700);</span>
+<span class="fc" id="L51">		j10 = new Participantes(&quot;Jugador 4&quot;, &quot;Cuatro&quot;, LocalDate.of(1998, 4, 4), EnumSexo.FEMENINO, &quot;Chile&quot;, 800);</span>
+<span class="fc" id="L52">		p1 = new Prueba(TipoPrueba.LUZ_ROJA_LUZ_VERDE);</span>
+<span class="fc" id="L53">		p2 = new Prueba(TipoPrueba.DALGONA);</span>
+<span class="fc" id="L54">		p3 = new Prueba(TipoPrueba.TIRON_DE_CUERDA);</span>
+
+<span class="fc" id="L56">		game.agregarParticipante(j1);</span>
+<span class="fc" id="L57">		game.agregarParticipante(j2);</span>
+<span class="fc" id="L58">		game.agregarParticipante(j3);</span>
+<span class="fc" id="L59">		game.agregarParticipante(j4);</span>
+<span class="fc" id="L60">		game.agregarParticipante(j5);</span>
+<span class="fc" id="L61">		game.agregarParticipante(j6);</span>
+<span class="fc" id="L62">		game.agregarParticipante(j7);</span>
+<span class="fc" id="L63">		game.agregarParticipante(j8);</span>
+<span class="fc" id="L64">		game.agregarParticipante(j9);</span>
+<span class="fc" id="L65">		game.agregarParticipante(j10);</span>
+<span class="fc" id="L66">		game.agregarPrueba(p1);</span>
+<span class="fc" id="L67">		game.agregarPrueba(p2);</span>
+<span class="fc" id="L68">		game.agregarPrueba(p3);</span>
+<span class="fc" id="L69">	}</span>
+
+	@Test
+	public void testGetPruebaActual() {
+<span class="fc" id="L73">		assertEquals(0, game.getPruebaActual());</span>
+<span class="fc" id="L74">	}</span>
+
+	@Test
+	public void testGetPruebaAnterior() {
+<span class="fc" id="L78">		assertEquals(0, game.getPruebaAnterior());</span>
+<span class="fc" id="L79">		game.setPruebaActual(1);</span>
+<span class="fc" id="L80">		assertEquals(0, game.getPruebaAnterior());</span>
+<span class="fc" id="L81">	}</span>
+
+	@Test
+	public void testGetPruebaSiguiente() {
+<span class="fc" id="L85">		assertEquals(1, game.getPruebaSiguiente());</span>
+<span class="fc" id="L86">		game.setPruebaActual(3);</span>
+<span class="fc" id="L87">		assertEquals(3, game.getPruebaSiguiente());</span>
+<span class="fc" id="L88">	}</span>
+
+	@Test
+	void testAgregarParticipante() {
+<span class="fc" id="L92">		Participantes nuevo = new Participantes(&quot;Luis&quot;, &quot;perez&quot;, LocalDate.of(1998, 4, 4), EnumSexo.FEMENINO, &quot;Chile&quot;, 800);</span>
+<span class="fc" id="L93">		game.agregarParticipante(nuevo);</span>
+<span class="fc" id="L94">		assertTrue(game.getParticipantes().contains(nuevo));</span>
+<span class="fc" id="L95">	}</span>
+
+	@Test
+	void testEliminarParticipante() throws InfiltradoNoEliminableException {
+		
+<span class="fc" id="L100">		Participantes nuevo = new Participantes(&quot;Luis&quot;, &quot;perez&quot;, LocalDate.of(1998, 4, 4), EnumSexo.FEMENINO, &quot;Chile&quot;, &quot;infiltrado1&quot;);</span>
+<span class="fc" id="L101">		InfiltradoNoEliminableException exception = assertThrows(InfiltradoNoEliminableException.class, </span>
+<span class="pc" id="L102">			    () -&gt; nuevo.eliminar(), </span>
+<span class="fc" id="L103">			    &quot;participante infiltrado no debe ser eliminado&quot;);</span>
+<span class="fc" id="L104">		 assertEquals(&quot;No se puede eliminar al jugador infiltrado Luis.&quot;, exception.getMessage());</span>
+<span class="fc" id="L105">		assertDoesNotThrow( </span>
+<span class="fc" id="L106">			    () -&gt; j1.eliminar(), </span>
+<span class="fc" id="L107">			    &quot;participante infiltrado no debe ser eliminado&quot;);</span>
+<span class="fc" id="L108">		j1.eliminar();</span>
+<span class="fc" id="L109">		assertTrue(j1.isEliminado());</span>
+		
+<span class="fc" id="L111">	}</span>
+
+	@Test
+	void testJugarRonda() {
+<span class="fc" id="L115">		int participantesIniciales = game.getListaParticipantesVivos().size();</span>
+<span class="fc" id="L116">		game.jugarRonda(m);</span>
+<span class="fc" id="L117">		int participantesDespues = game.getListaParticipantesVivos().size();</span>
+
+<span class="pc bpc" id="L119" title="1 of 2 branches missed.">		assertTrue(participantesDespues &lt; participantesIniciales, &quot;Debería haber eliminados tras una ronda&quot;);</span>
+<span class="fc" id="L120">		assertEquals(1, game.getPruebaActual(), &quot;La ronda actual debería haber aumentado a 1&quot;);</span>
+<span class="fc" id="L121">	}</span>
+
+	@Test
+	void testGetParticipantesVivos() throws InfiltradoNoEliminableException {
+<span class="fc" id="L125">		j1.eliminar();</span>
+<span class="fc" id="L126">		String vivos = game.getParticipantesVivos();</span>
+<span class="fc" id="L127">		assertFalse(vivos.contains(&quot;Juan&quot;), &quot;Juan debería estar eliminado&quot;);</span>
+<span class="fc" id="L128">	}</span>
+
+	@Test
+	void testGetParticipantesMuertos()  {
+		try {
+<span class="fc" id="L133">			j2.eliminar();</span>
+<span class="fc" id="L134">			j3.eliminar();</span>
+<span class="pc" id="L135">		} catch (InfiltradoNoEliminableException e) {</span>
+<span class="nc" id="L136">			System.err.println(e.getMessage());</span>
+		}
+<span class="fc" id="L138">		String muertos = game.getParticipantesMuertos();</span>
+<span class="pc bpc" id="L139" title="2 of 4 branches missed.">		assertTrue(muertos.contains(&quot;patata&quot;) &amp;&amp; muertos.contains(&quot;naranja&quot;), &quot;patata y naranja deberían estar eliminados&quot;);</span>
+<span class="fc" id="L140">	}</span>
+
+	@Test
+	void testMostrarPruebas() {
+<span class="fc" id="L144">		String pruebas = game.mostrarPruebas();</span>
+<span class="fc" id="L145">		assertEquals(pruebas, &quot;LUZ_ROJA_LUZ_VERDE: Correr cuando la muñeca no mire.\nDALGONA: Cortar la galleta sin romperla.\nTIRON_DE_CUERDA: Ganar un juego de tira y afloja en equipo.\n&quot;);</span>
+
+<span class="fc" id="L147">	}</span>
+
+	@Test
+	public void testSimularPrueba() {
+<span class="fc" id="L151">		Prueba prueba = game.getPruebas().get(game.getPruebaActual());</span>
+<span class="fc" id="L152">		game.jugarRonda(m);</span>
+<span class="fc" id="L153">		double minPorcentaje = (double) prueba.getTipo().getMinEliminados() / 100;</span>
+<span class="fc" id="L154">		double maxPorcentaje = (double) prueba.getTipo().getMaxEliminados() / 100;</span>
+<span class="fc" id="L155">		int minEliminados = (int) (prueba.getInscritos().size() * minPorcentaje);</span>
+<span class="fc" id="L156">		int maxEliminados = (int) (prueba.getInscritos().size() * maxPorcentaje);</span>
+
+<span class="fc" id="L158">		assertEquals(10, prueba.getInscritos().size(), &quot;Todos los participantes deben estar inscritos&quot;);</span>
+<span class="pc bpc" id="L159" title="2 of 4 branches missed.">		assertTrue(prueba.getEliminados().size() &gt;= minEliminados &amp;&amp; prueba.getEliminados().size() &lt;= maxEliminados,</span>
+<span class="fc" id="L160">				&quot;Debe haber entre &quot; + minEliminados + &quot; y &quot; + maxEliminados + &quot; eliminados&quot;);</span>
+<span class="fc" id="L161">		assertEquals(10 - prueba.getEliminados().size(), prueba.getVencedores().size(),</span>
+<span class="fc" id="L162">				&quot;Los vencedores no deben ser los eliminados&quot;);</span>
+
+<span class="fc" id="L164">		prueba = game.getPruebas().get(game.getPruebaActual());</span>
+<span class="fc" id="L165">		ArrayList&lt;Participantes&gt; pVivos = (ArrayList&lt;Participantes&gt;) game.getListaParticipantesVivos();</span>
+<span class="fc" id="L166">		game.jugarRonda(m);</span>
+<span class="fc" id="L167">		minPorcentaje = (double) prueba.getTipo().getMinEliminados() / 100;</span>
+<span class="fc" id="L168">		maxPorcentaje = (double) prueba.getTipo().getMaxEliminados() / 100;</span>
+<span class="fc" id="L169">		minEliminados = (int) (prueba.getInscritos().size() * minPorcentaje);</span>
+<span class="fc" id="L170">		maxEliminados = (int) (prueba.getInscritos().size() * maxPorcentaje);</span>
+
+<span class="fc" id="L172">		assertEquals(pVivos, prueba.getInscritos(), &quot;Todos los participantes vivos deben estar inscritos&quot;);</span>
+<span class="pc bpc" id="L173" title="2 of 4 branches missed.">		assertTrue(prueba.getEliminados().size() &gt;= minEliminados &amp;&amp; prueba.getEliminados().size() &lt;= maxEliminados,</span>
+<span class="fc" id="L174">				&quot;Debe haber entre &quot; + minEliminados + &quot; y &quot; + maxEliminados + &quot; eliminados&quot;);</span>
+<span class="fc" id="L175">		assertEquals(game.getListaParticipantesVivos(), prueba.getVencedores(),</span>
+<span class="fc" id="L176">				&quot;Los vencedores deben ser los participantes vivos&quot;);</span>
+
+<span class="fc" id="L178">		prueba = game.getPruebas().get(game.getPruebaActual());</span>
+<span class="fc" id="L179">		pVivos = (ArrayList&lt;Participantes&gt;) game.getListaParticipantesVivos();</span>
+<span class="fc" id="L180">		game.jugarRonda(m);</span>
+<span class="fc" id="L181">		minPorcentaje = (double) prueba.getTipo().getMinEliminados() / 100;</span>
+<span class="fc" id="L182">		maxPorcentaje = (double) prueba.getTipo().getMaxEliminados() / 100;</span>
+<span class="fc" id="L183">		minEliminados = (int) (prueba.getInscritos().size() * minPorcentaje);</span>
+<span class="fc" id="L184">		maxEliminados = (int) (prueba.getInscritos().size() * maxPorcentaje);</span>
+
+<span class="fc" id="L186">		assertEquals(pVivos, prueba.getInscritos(), &quot;Todos los participantes vivos deben estar inscritos&quot;);</span>
+<span class="pc bpc" id="L187" title="2 of 4 branches missed.">		assertTrue(prueba.getEliminados().size() &gt;= minEliminados &amp;&amp; prueba.getEliminados().size() &lt;= maxEliminados,</span>
+<span class="fc" id="L188">				&quot;Debe haber entre &quot; + minEliminados + &quot; y &quot; + maxEliminados + &quot; eliminados&quot;);</span>
+<span class="fc" id="L189">		assertEquals(game.getListaParticipantesVivos(), prueba.getVencedores(),</span>
+<span class="fc" id="L190">				&quot;Los vencedores deben ser los participantes vivos&quot;);</span>
+
+<span class="fc" id="L192">	}</span>
+
+	@Test
+	public void testTipoPrueba() {
+<span class="fc" id="L196">		Prueba prueba = game.getPruebas().get(game.getPruebaActual());</span>
+<span class="fc" id="L197">		assertEquals(&quot;Luz verde luz roja&quot;, prueba.getTipo().getNombre(), &quot;El nombre no coincide&quot;);</span>
+<span class="fc" id="L198">		assertEquals(&quot;Correr cuando la muñeca no mire.&quot;, prueba.getTipo().getDescripcion(),</span>
+<span class="fc" id="L199">				&quot;La descripción no coincide&quot;);</span>
+<span class="fc" id="L200">		assertEquals(30, prueba.getTipo().getMinEliminados(), &quot;El mínimo de eliminados no es correcto&quot;);</span>
+<span class="fc" id="L201">		assertEquals(65, prueba.getTipo().getMaxEliminados(), &quot;El máximo de eliminados no es correcto&quot;);</span>
+<span class="fc" id="L202">	}</span>
+
+	@Test
+	void testGetParticipantes() {
+<span class="fc" id="L206">		assertEquals(10, game.getParticipantes().size(), &quot;La cantidad de participantes no es correcta&quot;);</span>
+<span class="fc" id="L207">		assertEquals(10000, game.getBoteTotal(), &quot;El bote total no coincide&quot;);</span>
+<span class="fc" id="L208">		assertEquals(&quot;Oclajoma&quot;, game.getUbicacion(), &quot;La ubicación no coincide&quot;);</span>
+<span class="fc" id="L209">		assertEquals(LocalDate.of(2025, 2, 28), game.getFechaEvento(), &quot;La fecha del evento no coincide&quot;);</span>
+<span class="fc" id="L210">	}</span>
+	
+	 @Test
+	    void testJugarRondaSinParticipantesVivos() {
+<span class="fc" id="L214">	        Juego newGame =  new Juego(&quot;Oclajoma&quot;, LocalDate.of(2025, 2, 28), 10000);</span>
+<span class="fc" id="L215">	        newGame.jugarRonda(m);</span>
+<span class="fc" id="L216">	        assertEquals(0, newGame.getPruebaActual());</span>
+	        
+<span class="fc" id="L218">	        Prueba newPrueba = new Prueba(TipoPrueba.LUZ_ROJA_LUZ_VERDE);</span>
+<span class="fc" id="L219">	        newGame.agregarPrueba(newPrueba);</span>
+<span class="fc" id="L220">	        assertEquals(0, newGame.getPruebaActual());</span>
+<span class="fc" id="L221">	    }</span>
+	
+	@Test
+    void testRegisterManager() throws OrganizationException {
+<span class="fc" id="L225">        organization.registerManager(m);</span>
+<span class="fc" id="L226">        organization.registerManager(m2);</span>
+<span class="fc" id="L227">        assertTrue(organization.getMembers().contains(m));</span>
+<span class="fc" id="L228">        assertTrue(organization.getMembers().contains(m2));</span>
+<span class="fc" id="L229">    }</span>
+	
+	@Test
+    void testRegisterDuplicateManagerThrowsException() throws OrganizationException {
+<span class="fc" id="L233">		organization.registerManager(m);</span>
+<span class="fc" id="L234">        assertThrows(OrganizationException.class, () -&gt; {</span>
+<span class="nc" id="L235">            organization.registerManager(m);</span>
+<span class="nc" id="L236">        });</span>
+<span class="fc" id="L237">    }</span>
+	
+	@Test
+    void testAssignSupervisor() throws OrganizationException {
+<span class="fc" id="L241">        organization.registerManager(m);</span>
+<span class="fc" id="L242">        organization.addTeamMember(m, g1);</span>
+<span class="fc" id="L243">        assertEquals(m, g1.getSupervisor());</span>
+<span class="fc" id="L244">        assertTrue(m.getTeam().contains(g1));</span>
+<span class="fc" id="L245">    }</span>
+	
+	@Test
+    void testAddInvalidTeamMemberThrowsException() throws OrganizationException {
+<span class="fc" id="L249">		organization.registerManager(m);</span>
+<span class="fc" id="L250">    	organization.addTeamMember(m, m2);</span>
+<span class="fc" id="L251">    	assertFalse(m.getTeam().contains(m2));</span>
+<span class="fc" id="L252">    }</span>
+	
+	@Test
+    void testGetMember() throws OrganizationException {
+<span class="fc" id="L256">        organization.registerManager(m);</span>
+<span class="fc" id="L257">        assertEquals(m, organization.getMember(&quot;Manager1&quot;));</span>
+<span class="fc" id="L258">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span>TestJuego (7 mar 2025 19:55:29)</div></body></html>

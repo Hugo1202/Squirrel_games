@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Managers.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestJuego (7 mar 2025 19:55:29)</a> &gt; <a href="../../index.html" class="el_group">juego</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">juego</a> &gt; <span class="el_source">Managers.java</span></div><h1>Managers.java</h1><pre class="source lang-java linenums">package juego;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+
+public class Managers extends PinkGuards {
+	public static final String DEFAULT_WEAPON = &quot;SMITH_Y_WESSON_MODEL_10&quot;;
+
+	private int munition;
+	private List&lt;PinkGuards&gt; team;
+	private Prueba pruebaResponsable;
+
+	public Managers(String name, int munition, List&lt;PinkGuards&gt; team) {
+<span class="fc" id="L16">        super(name);</span>
+<span class="fc" id="L17">        this.munition = munition;</span>
+<span class="pc bpc" id="L18" title="1 of 2 branches missed.">        this.team = (team == null) ? new ArrayList&lt;&gt;() : team;</span>
+<span class="fc" id="L19">    }</span>
+
+	public int getMunition() {
+<span class="nc" id="L22">		return munition;</span>
+	}
+
+	public void setMunition(int munition) {
+<span class="nc" id="L26">		this.munition = munition;</span>
+<span class="nc" id="L27">	}</span>
+
+	public String getWeapon() {
+<span class="nc" id="L30">		return DEFAULT_WEAPON;</span>
+	}
+
+	public List&lt;PinkGuards&gt; getTeam() {
+<span class="fc" id="L34">		return team;</span>
+	}
+
+	public void setTeam(List&lt;PinkGuards&gt; team) {
+<span class="nc bnc" id="L38" title="All 2 branches missed.">		this.team = (team == null) ? new ArrayList&lt;&gt;() : team;</span>
+<span class="nc" id="L39">	}</span>
+
+	public void addTeamMember(PinkGuards member) {
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">		if (member != null) {</span>
+<span class="fc" id="L43">			this.team.add(member);</span>
+		}
+<span class="fc" id="L45">	}</span>
+
+	public void removeTeamMember(PinkGuards member) {
+<span class="nc" id="L48">		this.team.remove(member);</span>
+<span class="nc" id="L49">	}</span>
+
+	public Prueba getPruebaResponsable() {
+<span class="nc" id="L52">		return pruebaResponsable;</span>
+	}
+
+	public void setPruebaResponsable(Prueba prueba) {
+<span class="fc" id="L56">		this.pruebaResponsable = prueba;</span>
+<span class="fc" id="L57">	}</span>
+
+	@Override
+	public int getRank() {
+<span class="fc" id="L61">		return 3;</span>
+	}
+
+	 @Override
+	    public String toString() {
+<span class="nc" id="L66">	        return String.format(&quot;Manager | Nombre: %s | Munición: %d | Equipo: %d miembros&quot;,</span>
+<span class="nc" id="L67">	            name,</span>
+<span class="nc" id="L68">	            munition,</span>
+<span class="nc" id="L69">	            team.size()</span>
+	        );
+	    }
+
+	@Override
+	public boolean equals(Object o) {
+<span class="fc bfc" id="L75" title="All 2 branches covered.">		if (this == o)</span>
+<span class="fc" id="L76">			return true;</span>
+<span class="fc bfc" id="L77" title="All 2 branches covered.">		if (!(o instanceof Managers))</span>
+<span class="fc" id="L78">			return false;</span>
+<span class="fc" id="L79">		Managers managers = (Managers) o;</span>
+<span class="pc bpc" id="L80" title="2 of 4 branches missed.">		return munition == managers.munition &amp;&amp; Objects.equals(getName(), managers.getName())</span>
+<span class="nc bnc" id="L81" title="All 4 branches missed.">				&amp;&amp; Objects.equals(team, managers.team) &amp;&amp; Objects.equals(pruebaResponsable, managers.pruebaResponsable);</span>
+	}
+
+	@Override
+	public int hashCode() {
+<span class="nc" id="L86">		return Objects.hash(getName(), munition, team, pruebaResponsable);</span>
+	}
+
+	@Override
+	protected boolean contains(PinkGuards members) {
+		// TODO Auto-generated method stub
+<span class="nc" id="L92">		return false;</span>
+	}
+
+	@Override
+	protected void add(PinkGuards members) {
+		// TODO Auto-generated method stub
+		
+<span class="nc" id="L99">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span>TestJuego (7 mar 2025 19:55:29)</div></body></html>

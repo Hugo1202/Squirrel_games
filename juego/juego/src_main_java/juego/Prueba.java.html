@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Prueba.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestJuego (7 mar 2025 19:55:29)</a> &gt; <a href="../../index.html" class="el_group">juego</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">juego</a> &gt; <span class="el_source">Prueba.java</span></div><h1>Prueba.java</h1><pre class="source lang-java linenums">package juego;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+import enums.TipoPrueba;
+import excepciones.InfiltradoNoEliminableException;
+import excepciones.InvalidSupervisorException;
+
+/**
+ * La clase {@code Prueba} es la encargada de simular la ejecución de la prueba.
+ * 
+ * @version 1.0
+ * @see Juego
+ */
+
+public class Prueba {
+	private TipoPrueba tipo;
+	private List&lt;Participantes&gt; inscritos;
+	private List&lt;Participantes&gt; eliminados;
+	private List&lt;Participantes&gt; vencedores;
+	private PinkGuards responsable;
+
+	/**
+	 * Obtener información de los componentes de la prueba.
+	 * 
+	 * @param tipo,       especifica el tipo de prueba que se realizará.
+	 * @param inscritos,  es una lista de los participantes que hay antes de iniciar
+	 *                    la prueba.
+	 * @param eliminados, es la lista de los participantes que han sido eliminados
+	 *                    en la prueba.
+	 * @param vencedores, es la lista de los participantes que han superado la
+	 *                    prueba.
+	 */
+
+<span class="fc" id="L38">	public Prueba(TipoPrueba tipo) {</span>
+<span class="fc" id="L39">		this.tipo = tipo;</span>
+<span class="fc" id="L40">		this.inscritos = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L41">		this.eliminados = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L42">		this.vencedores = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L43">		this.responsable = null;</span>
+<span class="fc" id="L44">	}</span>
+
+	public TipoPrueba getTipo() {
+<span class="fc" id="L47">		return tipo;</span>
+	}
+
+	public List&lt;Participantes&gt; getInscritos() {
+<span class="fc" id="L51">		inscritos.sort(Comparator.comparingInt(Participantes::getId));</span>
+<span class="fc" id="L52">		return inscritos;</span>
+	}
+
+	public void setInscritos(List&lt;Participantes&gt; inscritos) {
+<span class="fc" id="L56">		this.inscritos = inscritos;</span>
+<span class="fc" id="L57">	}</span>
+
+	public List&lt;Participantes&gt; getEliminados() {
+<span class="fc" id="L60">		eliminados.sort(Comparator.comparingInt(Participantes::getId));</span>
+<span class="fc" id="L61">		return eliminados;</span>
+	}
+
+	public List&lt;Participantes&gt; getVencedores() {
+<span class="fc" id="L65">		vencedores.sort(Comparator.comparingInt(Participantes::getId));</span>
+<span class="fc" id="L66">		return vencedores;</span>
+	}
+
+	public PinkGuards getResponsable() {
+<span class="fc" id="L70">		return responsable;</span>
+	}
+
+	public void setResponsable(PinkGuards responsable) throws InvalidSupervisorException {
+<span class="pc bpc" id="L74" title="2 of 4 branches missed.">		if (responsable.getRank() &lt; 3 || responsable == null) {</span>
+<span class="nc" id="L75">			throw new InvalidSupervisorException(&quot;Supervisor debe tener mayor rango que Soldier.&quot;);</span>
+		}
+<span class="fc" id="L77">		this.responsable = responsable;</span>
+<span class="fc" id="L78">	}</span>
+
+	/**
+	 * Simula la ejecución de la prueba.
+	 * 
+	 * Este método toma una lista de participantes y simula una prueba, donde seran
+	 * eliminados de manera aleatoria.
+	 * 
+	 * El flujo es:
+	 * &lt;ol&gt;
+	 * &lt;li&gt;Se registran los participantes como &quot;inscritos&quot;.&lt;/li&gt;
+	 * &lt;li&gt;Se calcula el porcentaje de eliminados de forma aleatoria, dentro de un
+	 * rango permitido.&lt;/li&gt;
+	 * &lt;li&gt;Se mezclan los inscritos (shuffle) para que la eliminación sea
+	 * aleatoria.&lt;/li&gt;
+	 * &lt;li&gt;Se eliminan los participantes correspondientes al porcentaje de
+	 * eliminados&lt;/li&gt;
+	 * &lt;li&gt;Los eliminados se añaden a la lista de eliminados.&lt;/li&gt;
+	 * &lt;li&gt;El resto de participantes pasan a la lista de vencedores.&lt;/li&gt;
+	 * &lt;/ol&gt;
+	 * 
+	 * @param participantes Lista de participantes inscritos en la prueba.
+	 */
+
+	public void simularPrueba(List&lt;Participantes&gt; participantes) {
+<span class="fc" id="L103">		setInscritos(participantes);</span>
+<span class="fc" id="L104">		double porcentajeEliminados = (Math.random() * (tipo.getMaxEliminados() - tipo.getMinEliminados())</span>
+<span class="fc" id="L105">				+ tipo.getMinEliminados()) / 100.0;</span>
+<span class="fc" id="L106">		int eliminadosObjetivo = (int) (inscritos.size() * porcentajeEliminados);</span>
+<span class="fc" id="L107">		Collections.shuffle(inscritos);</span>
+<span class="fc bfc" id="L108" title="All 2 branches covered.">		for (int i = 0; i &lt; eliminadosObjetivo; i++) {</span>
+
+			try {
+<span class="fc" id="L111">				inscritos.get(i).eliminar();</span>
+<span class="fc" id="L112">				eliminados.add(inscritos.get(i));</span>
+<span class="pc" id="L113">			} catch (InfiltradoNoEliminableException e) {</span>
+<span class="nc" id="L114">				System.err.println(e.getMessage());</span>
+			}
+
+		}
+<span class="fc" id="L118">		vencedores.addAll(inscritos);</span>
+<span class="fc" id="L119">		vencedores.removeAll(eliminados);</span>
+<span class="fc" id="L120">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span>TestJuego (7 mar 2025 19:55:29)</div></body></html>
