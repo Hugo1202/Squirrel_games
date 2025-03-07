@@ -9,3 +9,6 @@ node_modules/
 # Ignorar archivos temporales
 *.tmp
 
+# Ignorar carpetas que empiecen con punto
+.*/
+
