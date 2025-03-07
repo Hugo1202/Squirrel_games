@@ -33,7 +33,7 @@ Squirrel_games/
 
 ## Clases Principales
 
-### Paquete `juego`
+### Paquete 'juego'
 - `Juego.java`: Controlador principal del juego.
 - `Main.java`: Punto de entrada al programa.
 - `Organization.java`: Gestión de la organización y sus miembros.
@@ -44,13 +44,18 @@ Squirrel_games/
 - `Soldiers.java`: Soldados con armamento específico.
 - `Workers.java`: Trabajadores con roles definidos.
 - `Prueba.java`: Define las pruebas que enfrentan los participantes.
-- `TipoPrueba.java`: Enum con los tipos de prueba.
-- `WeaponType.java`: Enum con los tipos de armas.
-- `Department.java`: Enum con los distintos departamentos de trabajo.
 
 ---
 
-### Paquete `excepciones`
+### Paquete 'enumeraciones'
+- `Department`: enumeración departamentos.
+- `EnumSexo`: enumeración sexo.
+- `TipoPrueba`: enumeración tipos de pruebas.
+- `WeaponType`: enumaración tipos de arma.
+
+---
+
+### Paquete 'excepciones'
 - `IdRepetidoException`: Lanza si hay un ID duplicado.
 - `InfiltradoNoEliminableException`: Maneja un caso particular de error.
 - `InvalidSupervisorException`: Error al asignar supervisor.
