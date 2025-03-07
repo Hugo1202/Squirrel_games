@@ -9,6 +9,3 @@ node_modules/
 # Ignorar archivos temporales
 *.tmp
 
-# Ignorar configuraciones del sistema operativo
-.DS_Store
-Thumbs.db
