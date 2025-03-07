@@ -59,7 +59,6 @@ Squirrel_games/
 ---
 
 ### Tests
-- `OrganizationTest.java`: Tests unitarios de la organización.
 - `TestJuego.java`: Conjunto de pruebas para verificar el flujo principal del juego.
 
 ---
