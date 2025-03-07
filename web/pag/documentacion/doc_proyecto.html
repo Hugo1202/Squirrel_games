@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentación De Proyecto</title>
+  <link rel="icon" href="../../img/favicon.ico" type="image/x-icon">
+
+  <link rel="stylesheet" href="../../css/style_documentacion.css">
+</head>
+<body>
+
+  <header>
+    <nav class="top-menu">
+      <div class="logo">
+        <a href="../../../index.html">
+            <img src="../../img/logo.png" alt="Logo de Squid Games" width="100" height="50">
+        </a>
+      </div>
+      <ul class="menu">
+        <li><a href="../../../index.html">Inicio</a></li>
+        <li class="dropdown">
+          <a href="#">Documentación</a>
+          <ul class="dropdown-content">
+            <li><a href="./doc_tecnica.html">Documentación técnica</a></li>
+            <li><a href="./doc_usuario.html">Documentación de usuario</a></li>
+            <li><a href="./doc_proyecto.html">Documentación de proyecto</a></li>
+            <li><a href="./doc_mantenimiento.html">Documentación de mantenimiento</a></li>
+          </ul>
+        </li>
+        <li><a href="../participantes.html">Participantes</a></li>
+        <li><a href="../descargar_proyecto.html">Descargar Proyecto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="doc-wrapper">
+    <h2> </h2>
+    <div class="doc-section">
+        <div class="doc-section">
+            <h2>Documentación del Proyecto</h2>
+
+            <p><span class="doc-highlight">Squirrel Games</span> es un proyecto académico cuyo objetivo es simular la gestión de una edición completa de unos juegos ficticios, combinando elementos de estrategia, azar y gestión de recursos humanos. Está inspirado en el popular "Squid Game", pero adaptado a un contexto de desarrollo de software educativo.</p>
+            
+            <h3>Objetivos del proyecto</h3>
+            <ul>
+                <li>Poner en práctica la Programación Orientada a Objetos (POO).</li>
+                <li>Aplicar manejo avanzado de excepciones personalizadas.</li>
+                <li>Gestionar un proyecto con Maven.</li>
+                <li>Desarrollar pruebas unitarias con JUnit.</li>
+                <li>Documentar el proyecto con Javadoc.</li>
+            </ul>
+            
+            <h3>Requisitos Funcionales</h3>
+            <ul>
+                <li>Unicidad de identificadores para participantes.</li>
+                <li>Jerarquía de supervisión estricta entre Pink Guards.</li>
+                <li>Prohibición de eliminación de infiltrados.</li>
+                <li>Simulación de pruebas con porcentaje de eliminados.</li>
+                <li>Asignación obligatoria de un Manager como responsable de cada prueba.</li>
+            </ul>
+            
+            <h3>Arquitectura</h3>
+            <p>El proyecto sigue la estructura estándar de Maven:</p>
+            <pre>
+            Squirrel_games/
+            └── src/
+                ├── main/java/ (Código principal)
+                ├── test/java/ (Pruebas unitarias)
+                └── resources/ (Recursos adicionales)
+            </pre>
+            
+            <p>El sistema combina lógica de negocio (clases de dominio como Organization, Participantes), con un motor de reglas para validaciones y un conjunto de pruebas automáticas para garantizar la estabilidad.</p>
+            
+            <h3>¿Cómo se diseñó?</h3>
+            <ul>
+                <li>Modelo de dominio claro.</li>
+                <li>Separación de responsabilidades.</li>
+                <li>Pruebas desde el inicio (Test Driven Development).</li>
+                <li>Código documentado con Javadoc.</li>
+            </ul>
+            
+            <p>En resumen, <span class="doc-highlight">Squirrel Games</span> es mucho más que un simple juego: es una demostración de cómo aplicar buenas prácticas en un proyecto realista dentro de un entorno académico.</p>
+        </div>
+    </div>
+
+</body>
+</html>

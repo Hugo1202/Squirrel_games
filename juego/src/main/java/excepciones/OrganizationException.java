@@ -1,4 +1,4 @@
-package squirrelGames;
+package excepciones;
 
 /**
  * Exception lanzada cuando operación inválida en organización.

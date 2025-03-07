@@ -1,4 +1,4 @@
-package squirrelGames;
+package excepciones;
 
 /**
  * Exception lanzada cuando el supervisor que se intenta asignar es de rango igual o inferior al subordinado.

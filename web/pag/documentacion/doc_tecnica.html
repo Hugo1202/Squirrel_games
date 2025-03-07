@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentación Técnica</title>
+  <link rel="icon" href="../../img/favicon.ico" type="image/x-icon">
+
+  <link rel="stylesheet" href="../../css/style_documentacion.css">
+</head>
+<body>
+
+  <header>
+    <nav class="top-menu">
+      <div class="logo">
+        <a href="../../../index.html">
+            <img src="../../img/logo.png" alt="Logo de Squid Games" width="100" height="50">
+        </a>
+      </div>
+      <ul class="menu">
+        <li><a href="../../../index.html">Inicio</a></li>
+        <li class="dropdown">
+          <a href="#">Documentación</a>
+          <ul class="dropdown-content">
+            <li><a href="./doc_tecnica.html">Documentación técnica</a></li>
+            <li><a href="./doc_usuario.html">Documentación de usuario</a></li>
+            <li><a href="./doc_proyecto.html">Documentación de proyecto</a></li>
+            <li><a href="./doc_mantenimiento.html">Documentación de mantenimiento</a></li>
+          </ul>
+        </li>
+        <li><a href="../participantes.html">Participantes</a></li>
+        <li><a href="../descargar_proyecto.html">Descargar Proyecto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="doc-wrapper">
+    <h2> </h2>
+    <div class="doc-section">
+        <div class="doc-section">
+            <h2>Documentación Técnica</h2>
+            
+        <p>El proyecto <span class="doc-highlight">Squirrel Games</span> es un ejemplo avanzado de simulación de una organización ficticia donde se aplican conceptos clave de Programación Orientada a Objetos (POO), como la herencia, polimorfismo y encapsulación. Además, sigue una arquitectura modular distribuida en paquetes temáticos.</p>
+        
+        <h3>Estructura del Proyecto</h3>
+        <p>El proyecto está organizado de la siguiente manera:</p>
+        <pre>
+        Squirrel_games/
+        └── juego/
+            ├── .classpath
+            ├── .gitignore
+            ├── .project
+            ├── pom.xml                <- Configuración principal de Maven
+            ├── src/
+            │   ├── main/
+            │   │   ├── java/
+            │   │   │   ├── excepciones/
+            │   │   │   └── juego/
+            │   │   └── resources/      <- (Si es necesario, aquí irían recursos adicionales)
+            │   └── test/
+            │       ├── java/
+            │       │   └── testJuego/  <- Tests unitarios
+            │       └── resources/
+            └── target/                  <- Generado por Maven (compilados)
+        </pre>
+        
+        <p>La estructura sigue el estándar de Maven, facilitando la gestión de dependencias, construcción y ejecución.</p>
+        
+        <p>Las clases principales son:</p>
+        <ul>
+            <li><span class="doc-highlight">Juego.java</span>: Controlador principal del juego.</li>
+            <li><span class="doc-highlight">Main.java</span>: Punto de entrada.</li>
+            <li><span class="doc-highlight">Organization.java</span>: Gestión de la organización y miembros.</li>
+            <li><span class="doc-highlight">Participantes.java</span>: Participantes del juego.</li>
+            <li><span class="doc-highlight">Persona.java</span>: Clase base común.</li>
+            <li><span class="doc-highlight">PinkGuards.java</span>: Clase abstracta para guardias.</li>
+            <li><span class="doc-highlight">Managers.java</span>: Supervisores.</li>
+            <li><span class="doc-highlight">Soldiers.java</span>: Soldados armados.</li>
+            <li><span class="doc-highlight">Workers.java</span>: Trabajadores.</li>
+            <li><span class="doc-highlight">Prueba.java</span>: Define las pruebas.</li>
+            <li><span class="doc-highlight">TipoPrueba.java</span>: Enum de tipos de prueba.</li>
+            <li><span class="doc-highlight">WeaponType.java</span>: Enum de armas.</li>
+            <li><span class="doc-highlight">Department.java</span>: Enum de departamentos.</li>
+        </ul>
+        
+        <p>En el paquete <span class="doc-highlight">excepciones</span>, se gestionan los errores específicos de negocio:</p>
+        <ul>
+            <li><span class="doc-highlight">IdRepetidoException</span>: Para IDs duplicados.</li>
+            <li><span class="doc-highlight">InfiltradoNoEliminableException</span>: Maneja infiltrados especiales.</li>
+            <li><span class="doc-highlight">InvalidSupervisorException</span>: Error de supervisión.</li>
+            <li><span class="doc-highlight">OrganizationException</span>: Excepción general.</li>
+        </ul>
+        
+        <p>El proyecto cuenta con pruebas unitarias en el paquete <span class="doc-highlight">testJuego</span>, que validan el comportamiento de las principales funcionalidades del juego.</p>
+        
+        </div>
+    </div>
+
+</body>
+</html>

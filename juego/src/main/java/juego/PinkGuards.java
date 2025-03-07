@@ -1,7 +1,8 @@
-package squirrelGames;
+package juego;
+
 
 public abstract class PinkGuards {
-	private String name;
+	protected String name;
 
 	public PinkGuards(String name) {
 		this.name = name;
@@ -14,6 +15,8 @@ public abstract class PinkGuards {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	
 	
 	public abstract int getRank();
 	

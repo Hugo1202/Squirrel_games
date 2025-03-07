@@ -1,0 +1,154 @@
+body {
+    
+    background: black;
+    margin: 0;
+    /* El overflow se controla mediante la clase */
+  }
+
+  body, html {
+    margin: 0;
+    padding: 0;
+  }
+  
+
+
+  /* El header se fija arriba, ocupa 100% de ancho */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: #000;  /* Color de fondo */
+    z-index: 1000;     /* Para estar por encima del contenido */
+  }
+  
+  /* El contenedor del menú, centrado y con ancho máximo */
+  .top-menu {
+    max-width: 1200px; /* Ajusta a tu gusto */
+    margin: 0 auto;    /* Centra horizontalmente */
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    color: #fff;
+  }
+  
+  /* Logo (izquierda) */
+  .top-menu .logo a {
+    color: #FE3477; /* Acento rojo estilo Squid Game */
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  
+  /* Menú principal (derecha) */
+  .top-menu .menu {
+    list-style: none;
+    display: flex;
+    margin-left: auto; /* Empuja el menú a la derecha */
+  }
+  .top-menu .menu li {
+    margin-left: 0;
+    list-style: none;
+    width: 100%;
+  }
+  
+  .top-menu .menu li {
+    position: relative;
+    margin-left: 20px;
+  }
+  
+  
+  .top-menu .menu li a {
+    text-decoration: none;
+    color: #fff;
+    padding: 8px 12px;
+    display: block;
+    transition: background-color 0.3s;
+  }
+  
+  .top-menu .menu li a:hover {
+    background-color: #FE3477;
+    border-radius: 4px;
+  }
+  
+ /* Submenú (dropdown) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #000;
+  min-width: 150px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  z-index: 1;
+  /* Evita cualquier margen interno extra */
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-content li {
+  list-style: none;     /* Quita bullets */
+  margin: 0;            /* Quita márgenes */
+  padding: 0;           /* Quita padding */
+  width: auto;          /* Evita que se expanda todo el ancho */
+}
+
+.dropdown-content li a {
+  padding: 10px;
+  display: block;       /* Asegura que ocupe todo el ancho del contenedor */
+}
+
+/* Al pasar el mouse sobre .dropdown, muestra .dropdown-content */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+/* Estilo exclusivo para el contenido de las documentaciones */
+.doc-wrapper {
+    margin-top: 80px; /* Espacio para que no se coma el menú */
+    padding: 20px;
+}
+
+/* Estilo general para cada sección de documentación */
+.doc-section {
+    background-color: #111; /* Fondo negro */
+    color: #f0f0f0; /* Texto claro */
+    border: 2px solid #E50914; /* Borde rojo squid */
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 12px;
+}
+
+/* Títulos */
+.doc-section h2 {
+    color: #E50914; /* Rojo Squid Game */
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #E50914;
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+}
+
+/* Texto general */
+.doc-section p {
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+/* Listas */
+.doc-section ul, .doc-section ol {
+    padding-left: 30px;
+}
+
+.doc-section li {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+/* Destacar nombres de clases, métodos o archivos */
+.doc-highlight {
+    font-weight: bold;
+    color: #FDE047; /* Amarillo Squid Game */
+    font-family: "Courier New", Courier, monospace;
+}
