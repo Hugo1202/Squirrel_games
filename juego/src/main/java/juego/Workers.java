@@ -2,28 +2,55 @@ package squirrelGames;
 
 import java.util.Objects;
 
+/**
+ * Clase Workers organización PinkGuards. Tienen department específico y supervisor asignado (rango superior).
+ */
 public class Workers extends PinkGuards {
 	private Department department;
 	private PinkGuards supervisor;
 
+	/**
+	 * Constructor Worker nombre, department y supervisor (rango mayor que Worker):
+	 * @param name nombre Worker
+	 * @param department departamento de pertenencia
+	 * @param supervisor Supervisor asignado
+	 * @throws InvalidSupervisorException si rango Supervisor es igual o menor a Worker
+	 */
 	public Workers(String name, Department department, PinkGuards supervisor) throws InvalidSupervisorException {
 		super(name);
 		this.department = department;
 		setSupervisor(supervisor);
 	}
 
+	/**
+	 * Devuelve department del Worker:
+	 * @return department
+	 */
 	public Department getDepartment() {
 		return department;
 	}
 
+	/**
+	 * Establece departamento Worker:
+	 * @param department nuevo departamento
+	 */
 	public void setDepartment(Department department) {
 		this.department = department;
 	}
 
+	/**
+	 * Devuelve supervisor del Worker:
+	 * @return supervisor
+	 */
 	public PinkGuards getSupervisor() {
 		return supervisor;
 	}
 
+	/**
+	 * Devuelve Supervisor del Worker:
+	 * @return supervisor (a asignar)
+	 * @throws InvalidSupervisorException si Supervisor igual o menor rango
+	 */
 	public void setSupervisor(PinkGuards supervisor) throws InvalidSupervisorException {
 		if (supervisor == null) {
 			this.supervisor = null;
