@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Main.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestJuego (7 mar 2025 19:55:29)</a> &gt; <a href="../../index.html" class="el_group">juego</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">juego</a> &gt; <span class="el_source">Main.java</span></div><h1>Main.java</h1><pre class="source lang-java linenums">package juego;
+
+import java.time.LocalDate;
+
+import enums.Department;
+import enums.EnumSexo;
+import enums.TipoPrueba;
+import enums.WeaponType;
+import excepciones.OrganizationException;
+
+<span class="nc" id="L11">public class Main {</span>
+<span class="nc" id="L12">	public static void main(String[] args) throws OrganizationException {</span>
+		Organization org = new Organization();
+
+		Managers m= new Managers(&quot;Manager1&quot;, 102, null);
+		Managers m2 = new Managers(&quot;Manager2&quot;, 102, null);
+        Soldiers g11 = new Soldiers(&quot;Guardia11&quot;, WeaponType.PISTOLA_GLOCK_17, 100);
+        Soldiers g21 = new Soldiers(&quot;Guardia21&quot;, WeaponType.RIFLE_AUTOMATICO_HECKLER_Y_KOCH_G3, 80);
+        Soldiers g31 = new Soldiers(&quot;Guardia31&quot;, WeaponType.PISTOLA_GLOCK_17, 100);
+        Soldiers g41 = new Soldiers(&quot;Guardia41&quot;, WeaponType.RILE_DE_ASALTO_HECKLER_Y_KOCH_MP5, 80);
+        Soldiers g1 = new Soldiers(&quot;Guardia1&quot;, WeaponType.PISTOLA_GLOCK_17, 100);
+        Soldiers g2 = new Soldiers(&quot;Guardia2&quot;, WeaponType.RIFLE_AUTOMATICO_HECKLER_Y_KOCH_G3, 80);
+        Soldiers g3 = new Soldiers(&quot;Guardia3&quot;, WeaponType.PISTOLA_GLOCK_17, 100);
+        Soldiers g4 = new Soldiers(&quot;Guardia4&quot;, WeaponType.RILE_DE_ASALTO_HECKLER_Y_KOCH_MP5, 80);
+        Workers t1 = new Workers(&quot;Trabajador1&quot;, Department.LIMPIEZA_DE_ELIMINADOS );
+        Workers t2 = new Workers(&quot;Trabajador2&quot;, Department.DISTRIBUCION_DE_ALIMENTOS);
+        Workers t3 = new Workers(&quot;Trabajador3&quot;, Department.PREPARACION_DE_JUEGOS);
+
+
+        try {
+        	org.registerManager(m);
+        	org.registerManager(m2);
+        } catch (OrganizationException e) {
+            System.out.println(&quot;Error al registrar miembro: &quot; + e.getMessage());
+        }
+        
+        
+        org.addTeamMember(m, t1);
+        org.addTeamMember(m, g1);
+        org.addTeamMember(m, t2);
+        org.addTeamMember(m, g3);
+        org.addTeamMember(m, g11);
+        org.addTeamMember(t2, g2);
+        org.addTeamMember(m, m2);
+        org.addTeamMember(g3, g31);
+        org.addTeamMember(g11, t3);
+        
+        
+
+        Juego juego = new Juego(&quot;Isla Secreta&quot;, LocalDate.of(2025, 3, 6), 100000.00);
+        
+        Prueba prueba1 = new Prueba(TipoPrueba.LUZ_ROJA_LUZ_VERDE);
+        Prueba prueba2 = new Prueba(TipoPrueba.DALGONA);
+        Prueba prueba3 = new Prueba(TipoPrueba.TIRON_DE_CUERDA);
+
+        juego.agregarPrueba(prueba1);
+        juego.agregarPrueba(prueba2);
+        juego.agregarPrueba(prueba3);
+        
+        juego.jugarRonda(m2);
+        System.out.println(juego);
+
+        Participantes j1 = new Participantes(&quot;pollo&quot;, &quot;peel&quot;, LocalDate.of(2000, 12, 28), EnumSexo.FEMENINO, &quot;Cakahuense&quot;, 700.7);
+		Participantes j2 = new Participantes(&quot;patata&quot;, &quot;peel&quot;, LocalDate.of(2000, 2, 29), EnumSexo.MASCULINO, &quot;Cakahuense&quot;, 302);
+		Participantes j3 = new Participantes(&quot;naranja&quot;, &quot;peel&quot;, LocalDate.of(2000, 2, 29), EnumSexo.MASCULINO, &quot;Cakahuense&quot;, 22);
+		Participantes j4 = new Participantes(&quot;paja&quot;, &quot;peel&quot;, LocalDate.of(2000, 12, 28), EnumSexo.MASCULINO, &quot;ohioyense&quot;, 700.7);
+		Participantes j5 = new Participantes(&quot;caballo&quot;, &quot;peel&quot;, LocalDate.of(2000, 12, 28), EnumSexo.MASCULINO, &quot;ohioyense&quot;, 700.7);
+		Participantes j6 = new Participantes(&quot;cabra&quot;, &quot;peel&quot;, LocalDate.of(2000, 12, 28), EnumSexo.MASCULINO, &quot;ohioyense&quot;, 700.7);
+        
+        juego.agregarTeam(m);
+
+		juego.agregarParticipante(j1);
+		juego.agregarParticipante(j2);
+		juego.agregarParticipante(j3);
+		juego.agregarParticipante(j4);
+		juego.agregarParticipante(j5);
+		juego.agregarParticipante(j6);
+
+        
+
+        System.out.println(&quot;Estado inicial del juego:&quot;);
+        System.out.println(juego);
+        System.out.println(&quot;Participantes iniciales:&quot;);
+        System.out.println(juego.mostrarParticipantes());
+        
+        juego.jugarRonda(m);
+//        System.out.println(juego);
+//        System.out.println(juego.getParticipantesVivos());
+//
+        juego.jugarRonda(m);
+//        System.out.println(juego);
+//        System.out.println(juego.getParticipantesVivos());
+//
+//        System.out.println(juego.getParticipantesMuertos());
+//
+//        System.out.println(&quot;Pruebas realizadas:&quot;);
+//        System.out.println(juego.mostrarPruebas());
+//
+////        System.out.println(juego.mostrarParticipantesInfiltrados());
+//        System.out.println(juego.getParticipantesVivos());
+        System.out.println(m);
+        System.out.println(m2);
+        System.out.println(g1);
+        System.out.println(g11);
+        System.out.println(g2);
+        System.out.println(g3);
+        System.out.println(t1);
+        System.out.println(t2);
+        System.out.println(org);
+        
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span>TestJuego (7 mar 2025 19:55:29)</div></body></html>

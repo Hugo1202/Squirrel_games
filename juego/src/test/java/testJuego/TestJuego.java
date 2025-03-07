@@ -10,6 +10,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import enums.*;
+import enums.WeaponType;
+import enums.Department;
 import excepciones.*;
 import juego.*;
 

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Soldiers.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestJuego (7 mar 2025 19:55:29)</a> &gt; <a href="../../index.html" class="el_group">juego</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">juego</a> &gt; <span class="el_source">Soldiers.java</span></div><h1>Soldiers.java</h1><pre class="source lang-java linenums">package juego;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+/**
+ * Clase Soldiers organización PinkGuards. Tienen WeaponType específico y registran munition disponible. Supervisor de rango superior.
+ */
+<span class="nc" id="L10">import enums.WeaponType;</span>
+import excepciones.InvalidSupervisorException;
+
+public class Soldiers extends PinkGuards {
+	private WeaponType weapon;
+	private int munition;
+	private PinkGuards supervisor;
+	private List&lt;PinkGuards&gt; team;
+
+	/**
+	 * Constructor Soldier nombre, WeaponType, munition y Supervisor:
+	 * @param name nombre Soldier
+	 * @param weapontype tipo de arma
+	 * @param munition cantidad de munición disponible
+	 * @param supervisor supervisor asignado
+	 * @throws InvalidSupervisorException si rango Supervisor es igual o menor a Soldier
+	 */
+	public Soldiers(String name, WeaponType weapon, int munition, PinkGuards supervisor) throws InvalidSupervisorException {
+
+	public Soldiers(String name, WeaponType weapon, int munition) {
+		super(name);
+		this.weapon = weapon;
+		this.munition = munition;
+		this.team = new ArrayList&lt;&gt;();
+	}
+
+	/**
+	 * Devuelve WeaponType:
+	 * 
+	 * @return tipo de arma
+	 */
+<span class="nc" id="L41">	public WeaponType getWeapon() {</span>
+		return weapon;
+	}
+
+	/**
+	 * Establece WeaponType Soldier:
+	 * 
+	 * @return weapontype
+	 */
+<span class="nc" id="L50">	public void setWeapon(WeaponType weapon) {</span>
+		this.weapon = weapon;
+	}
+
+	/**
+	 * Devuelve munition disponible:
+	 * 
+	 * @return munition
+	 */
+<span class="nc" id="L59">	public int getMunition() {</span>
+		return munition;
+	}
+
+	/**
+	 * Establece cantidad disponible de munition:
+	 * 
+	 * @param munition cantidad disponible
+	 */
+<span class="nc" id="L68">	public void setMunition(int munition) {</span>
+		this.munition = munition;
+	}
+
+	/**
+	 * Devuelve supervisor del Soldier:
+	 * 
+	 * @return supervisor
+	 */
+<span class="nc" id="L77">	public PinkGuards getSupervisor() {</span>
+		return supervisor;
+	}
+
+	/**
+	 * Devuelve Supervisor del Soldier:
+	 * 
+	 * @return supervisor (a asignar)
+	 * @throws InvalidSupervisorException si Supervisor igual o menor rango
+	 */
+<span class="nc" id="L87">	public void setSupervisor(PinkGuards supervisor) throws InvalidSupervisorException {</span>
+		if (supervisor == null) {
+			this.supervisor = null;
+		} else {
+			if (supervisor.getRank() &lt;= this.getRank()) {
+				throw new InvalidSupervisorException(&quot;Supervisor debe tener mayor rango que &quot; + getName() + &quot;.&quot;);
+			}
+			this.supervisor = supervisor;
+		}
+	}
+
+<span class="nc" id="L98">	public void addTeamMember(PinkGuards member) {</span>
+		if (member != null) {
+			this.team.add(member);
+		}
+	}
+
+	@Override
+<span class="nc" id="L105">	public int getRank() {</span>
+		return 2;
+	}
+
+	@Override
+<span class="nc" id="L110">	public String toString() {</span>
+		String info = &quot;Soldier | Nombre: %s | Arma: %s | Munición: %d&quot;;
+		if (supervisor != null) {
+			info += &quot; | Supervisor: %s&quot;;
+			return String.format(info + &quot; | Equipo: %d miembros&quot;, name, weapon, munition, supervisor.name, team.size());
+		}
+		return String.format(info + &quot; | Equipo: %d miembros&quot;, name, weapon, munition, team.size());
+	}
+
+	@Override
+<span class="nc" id="L120">	public boolean equals(Object o) {</span>
+		if (this == o)
+			return true;
+		if (!(o instanceof Soldiers))
+			return false;
+		Soldiers soldiers = (Soldiers) o;
+		return munition == soldiers.munition &amp;&amp; weapon == soldiers.weapon
+				&amp;&amp; Objects.equals(getName(), soldiers.getName()) &amp;&amp; Objects.equals(supervisor, soldiers.supervisor);
+	}
+
+	@Override
+<span class="nc" id="L131">	public int hashCode() {</span>
+		return Objects.hash(getName(), weapon, munition, supervisor);
+	}
+
+	@Override
+<span class="nc" id="L136">	protected boolean contains(PinkGuards members) {</span>
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+<span class="nc" id="L142">	protected void add(PinkGuards members) {</span>
+		// TODO Auto-generated method stub
+
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span>TestJuego (7 mar 2025 19:55:29)</div></body></html>

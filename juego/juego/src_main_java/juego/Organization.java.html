@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Organization.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestJuego (7 mar 2025 19:55:29)</a> &gt; <a href="../../index.html" class="el_group">juego</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">juego</a> &gt; <span class="el_source">Organization.java</span></div><h1>Organization.java</h1><pre class="source lang-java linenums">package juego;
+
+import java.util.ArrayList;
+import java.util.List;
+
+<span class="nc" id="L6">import excepciones.InvalidSupervisorException;</span>
+import excepciones.OrganizationException;
+
+/**
+ * Clase organización PinkGuards. Registro de miembros, asignación supervisores y equipos y detección de jerarquías.
+ */
+public class Organization {
+	private List&lt;PinkGuards&gt; members;
+
+	/**
+	 * Crea instancia de la organización.
+	 */
+	public Organization() {
+		this.members = new ArrayList&lt;&gt;();
+	}
+
+	/**
+	 * Registro nuevos miembros. Valida supervisor y su registro.
+	 * @param member miembro a registrar
+	 * @throws OrganizationException si membro es nulo, está registrado o supervisor no encontrado
+	 */
+<span class="nc" id="L27">	public void registerManager(Managers manager) throws OrganizationException {</span>
+		if (manager == null) {
+			throw new OrganizationException(&quot;El Manager no puede ser nulo.&quot;);
+		}
+		if (this.members.contains(manager)) {
+			throw new OrganizationException(&quot;El Manager ya se encuentra registrado en la organización.&quot;);
+		}
+		this.members.add(manager);
+	}
+
+	/**
+	 * Asigna supervisor a miembro registrado. Valida existencia y jerarquía.
+	 * @param subordinate miembro a supervisar
+	 * @param supervisor (a asignar)
+	 * @throws OrganizationException si miembro no registrado o no sigue jerarquía
+	 */
+<span class="nc" id="L43">	public void assignSupervisor(PinkGuards supervisor, PinkGuards subordinate) throws OrganizationException {</span>
+		try {
+			if (subordinate == null || supervisor == null) {
+				throw new OrganizationException(&quot;Los miembros no pueden ser nulos.&quot;);
+			}
+			if (!members.contains(subordinate)) {
+				throw new OrganizationException(&quot;El miembro subordinate no está registrado en la organización.&quot;);
+			}
+			if (!members.contains(supervisor)) {
+				throw new OrganizationException(&quot;El supervisor no está registrado en la organización.&quot;);
+			}
+			//Managers no pueden tener supervisor
+			if (subordinate instanceof Managers) {
+				throw new OrganizationException(&quot;Un Manager no puede tener supervisor.&quot;);
+			}
+			if (hasCycle(subordinate, supervisor)) {
+				throw new OrganizationException(&quot;Asignación cíclica detectada: '&quot; + supervisor.getName()
+						+ &quot;' ya supervisa, directa o indirectamente, a '&quot; + subordinate.getName() + &quot;'.&quot;);
+			}
+		} catch (OrganizationException e) {
+			System.err.println(e.getMessage());
+		}
+
+		try {
+			if (subordinate instanceof Workers) {
+				((Workers) subordinate).setSupervisor(supervisor);
+
+			} else if (subordinate instanceof Soldiers) {
+				((Soldiers) subordinate).setSupervisor(supervisor);
+			}
+		} catch (InvalidSupervisorException e) {
+			System.err.println(&quot;Error al asignar supervisor: &quot; + e.getMessage());
+		}
+	}
+
+	/**
+	 * Verificación si candidateSupervisor como supervisor de subordinate genera ciclo jerárquico
+	 * @param subordinate miembro subordinado
+	 * @param candidateSupervisor candidato a supervisor
+	 * @return true si ciclo, false si no
+	 */
+<span class="nc" id="L84">	private boolean hasCycle(PinkGuards subordinate, PinkGuards candidateSupervisor) {</span>
+		PinkGuards current = candidateSupervisor;
+		while (current != null) {
+			if (current.equals(subordinate)) {
+				return true;
+			}
+			//Managers no tienen supervisor
+			if (current instanceof Managers) {
+				break;
+			} else if (current instanceof Workers) {
+				current = ((Workers) current).getSupervisor();
+			} else if (current instanceof Soldiers) {
+				current = ((Soldiers) current).getSupervisor();
+			} else {
+				break;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Asigna subordinate a equipo de Manager:
+	 * @param manager que gestiona subordinate
+	 * @param subordinate a asignar en equipo
+	 * @throws OrganizationException si miembro no registrado o asignación rompe jerarquía
+	 */
+<span class="nc" id="L110">	public void addTeamMember(PinkGuards managers, PinkGuards subordinate) throws OrganizationException {</span>
+		try {
+			if (!members.contains(subordinate)) {
+				members.add(subordinate);
+			}
+			if (managers == null || subordinate == null) {
+				throw new OrganizationException(&quot;Los miembros no pueden ser nulos.&quot;);
+			}
+			if (!members.contains(managers)) {
+				throw new OrganizationException(&quot;El Manager no está registrado en la organización.&quot;);
+			}
+			//Manager no puede ser subordinate
+			if (subordinate instanceof Managers) {
+				throw new OrganizationException(
+						&quot;No se puede asignar un Manager como miembro del equipo de otro Manager.&quot;);
+			}
+			if (managers instanceof Soldiers &amp;&amp; !(subordinate instanceof Workers)) {
+				throw new OrganizationException(&quot;Un Soldier solo puede supervisar Workers.&quot;);
+			}
+			if (managers instanceof Managers &amp;&amp; !(subordinate instanceof Soldiers || subordinate instanceof Workers)) {
+				throw new OrganizationException(&quot;Un Manager solo puede supervisar Soldiers o Workers.&quot;);
+			}
+			//Verifica subordinado no asignado a otro Manager
+			for (PinkGuards member : members) {
+				if (member instanceof Managers) {
+					Managers mgr = (Managers) member;
+					if (mgr != managers &amp;&amp; mgr.getTeam().contains(subordinate)) {
+						throw new OrganizationException(&quot;El miembro ya está asignado al equipo de otro Manager.&quot;);
+					}
+				}
+			}
+
+			
+			if (managers instanceof Managers) {
+				((Managers) managers).addTeamMember(subordinate);
+
+			} else if (managers instanceof Soldiers) {
+				((Soldiers) managers).addTeamMember(subordinate);
+			}
+			assignSupervisor(managers, subordinate);
+		} catch (OrganizationException e) {
+			System.err.println(e.getMessage());
+		}
+	}
+
+	/**
+	 * Busca miembro organización por nombre:
+	 * @param name nombre miembro
+	 * @return instancia PinkGuard encontrado; null si no encontrado
+	 */
+<span class="nc" id="L160">	public PinkGuards getMember(String name) {</span>
+		for (PinkGuards member : members) {
+			if (member.getName().equals(name)) {
+				return member;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Devuelve lista miembros registrados:
+	 * @return lista miembros
+	 */
+<span class="nc" id="L173">	public List&lt;PinkGuards&gt; getMembers() {</span>
+		return new ArrayList&lt;&gt;(members);
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder(&quot;Organización:&quot;);
+<span class="nc" id="L180">		for (PinkGuards member : members) {</span>
+			sb.append(&quot;\n&quot;).append(member);
+		}
+		return sb.toString();
+	}
+	
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span>TestJuego (7 mar 2025 19:55:29)</div></body></html>
