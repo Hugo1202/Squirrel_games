@@ -2,6 +2,7 @@ package juego;
 
 import java.time.LocalDate;
 
+import enums.EnumSexo;
 import excepciones.InfiltradoNoEliminableException;
 
 /**
@@ -35,7 +36,7 @@ public class Participantes extends Persona {
      * @param id, nos asegura que nos da un ID unico para cada participante.
      */
     
-    public Participantes(String nombre, String apellidos, LocalDate fechaNacimiento, String sexo, String nacionalidad, double deudaAcumulada) {
+    public Participantes(String nombre, String apellidos, LocalDate fechaNacimiento, EnumSexo sexo, String nacionalidad, double deudaAcumulada) {
         super(nombre, apellidos, fechaNacimiento, sexo, nacionalidad);
         this.deudaAcumulada = deudaAcumulada;
         this.infiltrado = false;
@@ -59,7 +60,7 @@ public class Participantes extends Persona {
      * @param id, nos asegura que nos da un ID unico para cada infiltrado.
      */
 
-    public Participantes(String nombre, String apellidos, LocalDate fechaNacimiento, String sexo, String nacionalidad, String nombreFalso) {
+    public Participantes(String nombre, String apellidos, LocalDate fechaNacimiento, EnumSexo sexo, String nacionalidad, String nombreFalso) {
         super(nombre, apellidos, fechaNacimiento, sexo, nacionalidad);
         this.infiltrado = true;
         this.nombreFalso = nombreFalso;

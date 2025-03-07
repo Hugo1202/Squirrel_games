@@ -42,16 +42,16 @@ public class TestJuego {
 
 		game.agregarTeam(m);
 
-		j1 = new Participantes("pollo", "peel", LocalDate.of(2000, 12, 28), "Ha", "Cakahuense", 700.7);
-		j2 = new Participantes("patata", "peel", LocalDate.of(2000, 2, 29), "Ha", "Cakahuense", 700.7);
-		j3 = new Participantes("naranja", "peel", LocalDate.of(2000, 2, 29), "Ha", "Cakahuense", 700.7);
-		j4 = new Participantes("paja", "peel", LocalDate.of(2000, 12, 28), "Ha", "ohioyense", 700.7);
-		j5 = new Participantes("caballo", "peel", LocalDate.of(2000, 12, 28), "Ha", "ohioyense", 700.7);
-		j6 = new Participantes("cabra", "peel", LocalDate.of(2000, 12, 28), "Ha", "ohioyense", 700.7);
-		j7 = new Participantes("Jugador 1", "Uno", LocalDate.of(1995, 1, 1), "Masculino", "España", 500);
-		j8 = new Participantes("Jugador 2", "Dos", LocalDate.of(1996, 2, 2), "Femenino", "México", 600);
-		j9 = new Participantes("Jugador 3", "Tres", LocalDate.of(1997, 3, 3), "Masculino", "Argentina", 700);
-		j10 = new Participantes("Jugador 4", "Cuatro", LocalDate.of(1998, 4, 4), "Femenino", "Chile", 800);
+		j1 = new Participantes("pollo", "peel", LocalDate.of(2000, 12, 28), EnumSexo.MASCULINO, "Cakahuense", 700.7);
+		j2 = new Participantes("patata", "peel", LocalDate.of(2000, 2, 29), EnumSexo.MASCULINO, "Cakahuense", 700.7);
+		j3 = new Participantes("naranja", "peel", LocalDate.of(2000, 2, 29), EnumSexo.MASCULINO, "Cakahuense", 700.7);
+		j4 = new Participantes("paja", "peel", LocalDate.of(2000, 12, 28), EnumSexo.MASCULINO, "ohioyense", 700.7);
+		j5 = new Participantes("caballo", "peel", LocalDate.of(2000, 12, 28), EnumSexo.MASCULINO, "ohioyense", 700.7);
+		j6 = new Participantes("cabra", "peel", LocalDate.of(2000, 12, 28), EnumSexo.MASCULINO, "ohioyense", 700.7);
+		j7 = new Participantes("Jugador 1", "Uno", LocalDate.of(1995, 1, 1), EnumSexo.MASCULINO, "España", 500);
+		j8 = new Participantes("Jugador 2", "Dos", LocalDate.of(1996, 2, 2), EnumSexo.FEMENINO, "México", 600);
+		j9 = new Participantes("Jugador 3", "Tres", LocalDate.of(1997, 3, 3), EnumSexo.FEMENINO, "Argentina", 700);
+		j10 = new Participantes("Jugador 4", "Cuatro", LocalDate.of(1998, 4, 4), EnumSexo.FEMENINO, "Chile", 800);
 		p1 = new Prueba(TipoPrueba.LUZ_ROJA_LUZ_VERDE);
 		p2 = new Prueba(TipoPrueba.DALGONA);
 		p3 = new Prueba(TipoPrueba.TIRON_DE_CUERDA);
@@ -92,7 +92,7 @@ public class TestJuego {
 
 	@Test
 	void testAgregarParticipante() {
-		Participantes nuevo = new Participantes("Luis", "perez", LocalDate.of(1998, 4, 4), "Femenino", "Chile", 800);
+		Participantes nuevo = new Participantes("Luis", "perez", LocalDate.of(1998, 4, 4), EnumSexo.FEMENINO, "Chile", 800);
 		game.agregarParticipante(nuevo);
 		assertTrue(game.getParticipantes().contains(nuevo));
 	}
@@ -100,7 +100,7 @@ public class TestJuego {
 	@Test
 	void testEliminarParticipante() throws InfiltradoNoEliminableException {
 		
-		Participantes nuevo = new Participantes("Luis", "perez", LocalDate.of(1998, 4, 4), "Femenino", "Chile", "infiltrado1");
+		Participantes nuevo = new Participantes("Luis", "perez", LocalDate.of(1998, 4, 4), EnumSexo.FEMENINO, "Chile", "infiltrado1");
 		InfiltradoNoEliminableException exception = assertThrows(InfiltradoNoEliminableException.class, 
 			    () -> nuevo.eliminar(), 
 			    "participante infiltrado no debe ser eliminado");
@@ -134,10 +134,6 @@ public class TestJuego {
 	void testGetParticipantesMuertos()  {
 		try {
 			j2.eliminar();
-//		} catch (InfiltradoNoEliminableException e) {
-//			System.err.println(e.getMessage());
-//		}
-//		try {
 			j3.eliminar();
 		} catch (InfiltradoNoEliminableException e) {
 			System.err.println(e.getMessage());
