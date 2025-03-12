@@ -5,16 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Documentación Técnica</title>
   <link rel="icon" href="../../img/favicon.ico" type="image/x-icon">
-
   <link rel="stylesheet" href="../../css/style_documentacion.css">
 </head>
 <body>
-
   <header>
     <nav class="top-menu">
       <div class="logo">
         <a href="../../../index.html">
-            <img src="../../img/logo.png" alt="Logo de Squid Games" width="100" height="50">
+            <img src="../../img/logo.png" alt="Logo de Squirrel Games" width="100" height="50">
         </a>
       </div>
       <ul class="menu">
@@ -35,66 +33,65 @@
   </header>
 
   <div class="doc-wrapper">
-    <h2> </h2>
+    <h2>Documentación Técnica</h2>
     <div class="doc-section">
-        <div class="doc-section">
-            <h2>Documentación Técnica</h2>
-            
-        <p>El proyecto <span class="doc-highlight">Squirrel Games</span> es un ejemplo avanzado de simulación de una organización ficticia donde se aplican conceptos clave de Programación Orientada a Objetos (POO), como la herencia, polimorfismo y encapsulación. Además, sigue una arquitectura modular distribuida en paquetes temáticos.</p>
+        <p>El proyecto <span class="doc-highlight">Squirrel Games</span> es un simulador de organización basado en dinámicas tipo "Squid Game", implementado en <strong>Java</strong> con <strong>Maven</strong>. Su arquitectura modular permite un desarrollo escalable y mantenible.</p>
         
         <h3>Estructura del Proyecto</h3>
-        <p>El proyecto está organizado de la siguiente manera:</p>
         <pre>
-        Squirrel_games/
-        └── juego/
-            ├── .classpath
-            ├── .gitignore
-            ├── .project
-            ├── pom.xml                <- Configuración principal de Maven
-            ├── src/
-            │   ├── main/
-            │   │   ├── java/
-            │   │   │   ├── excepciones/
-            │   │   │   └── juego/
-            │   │   └── resources/      <- (Si es necesario, aquí irían recursos adicionales)
-            │   └── test/
-            │       ├── java/
-            │       │   └── testJuego/  <- Tests unitarios
-            │       └── resources/
-            └── target/                  <- Generado por Maven (compilados)
+          Squirrel_games/
+          ├── pom.xml                <- Configuración de Maven
+          ├── README.md              <- Información del proyecto
+          ├── docs/                  <- Documentación generada automáticamente
+          ├── src/
+          │   ├── main/java/         <- Código fuente
+          │   │   ├── enums/         <- Enumeraciones (Department, TipoPrueba, etc.)
+          │   │   ├── excepciones/   <- Excepciones personalizadas
+          │   │   ├── juego/         <- Clases del juego (Juego, Organization, etc.)
+          │   ├── test/java/         <- Pruebas unitarias con JUnit
+          ├── web/                   <- Interfaz web
+          │   ├── css/               <- Hojas de estilo
+          │   ├── js/                <- Scripts
+          │   ├── img/               <- Imágenes
+          │   ├── pag/               <- Páginas adicionales
+          └── target/                <- Archivos compilados
         </pre>
-        
-        <p>La estructura sigue el estándar de Maven, facilitando la gestión de dependencias, construcción y ejecución.</p>
-        
-        <p>Las clases principales son:</p>
+
+        <h3>📌 Clases Principales</h3>
         <ul>
-            <li><span class="doc-highlight">Juego.java</span>: Controlador principal del juego.</li>
+            <li><span class="doc-highlight">Juego.java</span>: Controlador del juego.</li>
             <li><span class="doc-highlight">Main.java</span>: Punto de entrada.</li>
-            <li><span class="doc-highlight">Organization.java</span>: Gestión de la organización y miembros.</li>
-            <li><span class="doc-highlight">Participantes.java</span>: Participantes del juego.</li>
-            <li><span class="doc-highlight">Persona.java</span>: Clase base común.</li>
+            <li><span class="doc-highlight">Organization.java</span>: Gestión de la organización.</li>
+            <li><span class="doc-highlight">Participantes.java</span>: Representación de jugadores.</li>
+            <li><span class="doc-highlight">Persona.java</span>: Clase base para personajes.</li>
             <li><span class="doc-highlight">PinkGuards.java</span>: Clase abstracta para guardias.</li>
             <li><span class="doc-highlight">Managers.java</span>: Supervisores.</li>
             <li><span class="doc-highlight">Soldiers.java</span>: Soldados armados.</li>
             <li><span class="doc-highlight">Workers.java</span>: Trabajadores.</li>
-            <li><span class="doc-highlight">Prueba.java</span>: Define las pruebas.</li>
-            <li><span class="doc-highlight">TipoPrueba.java</span>: Enum de tipos de prueba.</li>
-            <li><span class="doc-highlight">WeaponType.java</span>: Enum de armas.</li>
-            <li><span class="doc-highlight">Department.java</span>: Enum de departamentos.</li>
+            <li><span class="doc-highlight">Prueba.java</span>: Modelo de pruebas del juego.</li>
         </ul>
-        
-        <p>En el paquete <span class="doc-highlight">excepciones</span>, se gestionan los errores específicos de negocio:</p>
-        <ul>
-            <li><span class="doc-highlight">IdRepetidoException</span>: Para IDs duplicados.</li>
-            <li><span class="doc-highlight">InfiltradoNoEliminableException</span>: Maneja infiltrados especiales.</li>
-            <li><span class="doc-highlight">InvalidSupervisorException</span>: Error de supervisión.</li>
-            <li><span class="doc-highlight">OrganizationException</span>: Excepción general.</li>
-        </ul>
-        
-        <p>El proyecto cuenta con pruebas unitarias en el paquete <span class="doc-highlight">testJuego</span>, que validan el comportamiento de las principales funcionalidades del juego.</p>
-        
-        </div>
-    </div>
 
+        <h3>📂 Enumeraciones</h3>
+        <ul>
+            <li><span class="doc-highlight">Department.java</span>: Departamentos de la organización.</li>
+            <li><span class="doc-highlight">EnumSexo.java</span>: Género de los personajes.</li>
+            <li><span class="doc-highlight">TipoPrueba.java</span>: Tipos de pruebas.</li>
+            <li><span class="doc-highlight">WeaponType.java</span>: Tipos de armas.</li>
+        </ul>
+        
+        <h3>⚠️ Excepciones Personalizadas</h3>
+        <ul>
+            <li><span class="doc-highlight">InfiltradoNoEliminableException</span>: Para infiltrados no eliminables.</li>
+            <li><span class="doc-highlight">InvalidSupervisorException</span>: Error en asignación de supervisores.</li>
+            <li><span class="doc-highlight">OrganizationException</span>: Excepción general del juego.</li>
+        </ul>
+        
+        <h3>🧪 Pruebas Unitarias</h3>
+        <p>El proyecto incorpora pruebas en <strong>JUnit</strong> para validar la funcionalidad clave:</p>
+        <ul>
+            <li><span class="doc-highlight">TestJuego.java</span>: Pruebas del flujo del juego.</li>
+        </ul>
+    </div>
+  </div>
 </body>
 </html>
