@@ -14,7 +14,7 @@ Squirrel_games/
 ├── .gitignore
 ├── .project
 ├── pom.xml                <- Configuración principal de Maven
-├── README.md              <- Este archivo
+├── README.md              <- Información del proyecto
 ├── docs/                  <- Documentación generada automáticamente
 │   ├── index.html         <- Página de inicio de la documentación
 │   ├── legal/             <- Licencias y términos legales
