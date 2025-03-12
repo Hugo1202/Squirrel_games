@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Soldiers.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestJuego (1) (12 mar 2025 18:44:50)</a> &gt; <a href="../../index.html" class="el_group">Squirrel_games</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">juego</a> &gt; <span class="el_source">Soldiers.java</span></div><h1>Soldiers.java</h1><pre class="source lang-java linenums">package juego;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+/**
+ * Clase Soldiers organización PinkGuards. Tienen WeaponType específico y registran munition disponible. Supervisor de rango superior.
+ */
+import enums.WeaponType;
+import excepciones.InvalidSupervisorException;
+
+public class Soldiers extends PinkGuards {
+	private WeaponType weapon;
+	private int munition;
+	private PinkGuards supervisor;
+	private List&lt;PinkGuards&gt; team;
+
+	/**
+	 * Constructor Soldier nombre, WeaponType, munition y Supervisor:
+	 * @param name nombre Soldier
+	 * @param weapontype tipo de arma
+	 * @param munition cantidad de munición disponible
+	 * @param supervisor supervisor asignado
+	 * @throws InvalidSupervisorException si rango Supervisor es igual o menor a Soldier
+	 */
+
+	public Soldiers(String name, WeaponType weapon, int munition) {
+<span class="fc" id="L29">		super(name);</span>
+<span class="fc" id="L30">		this.weapon = weapon;</span>
+<span class="fc" id="L31">		this.munition = munition;</span>
+<span class="fc" id="L32">		this.team = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L33">	}</span>
+
+	/**
+	 * Devuelve WeaponType:
+	 * 
+	 * @return tipo de arma
+	 */
+	public WeaponType getWeapon() {
+<span class="nc" id="L41">		return weapon;</span>
+	}
+
+	/**
+	 * Establece WeaponType Soldier:
+	 * 
+	 * @return weapontype
+	 */
+	public void setWeapon(WeaponType weapon) {
+<span class="nc" id="L50">		this.weapon = weapon;</span>
+<span class="nc" id="L51">	}</span>
+
+	/**
+	 * Devuelve munition disponible:
+	 * 
+	 * @return munition
+	 */
+	public int getMunition() {
+<span class="nc" id="L59">		return munition;</span>
+	}
+
+	/**
+	 * Establece cantidad disponible de munition:
+	 * 
+	 * @param munition cantidad disponible
+	 */
+	public void setMunition(int munition) {
+<span class="nc" id="L68">		this.munition = munition;</span>
+<span class="nc" id="L69">	}</span>
+
+	/**
+	 * Devuelve supervisor del Soldier:
+	 * 
+	 * @return supervisor
+	 */
+	public PinkGuards getSupervisor() {
+<span class="fc" id="L77">		return supervisor;</span>
+	}
+
+	/**
+	 * Devuelve Supervisor del Soldier:
+	 * 
+	 * @return supervisor (a asignar)
+	 * @throws InvalidSupervisorException si Supervisor igual o menor rango
+	 */
+	public void setSupervisor(PinkGuards supervisor) throws InvalidSupervisorException {
+<span class="pc bpc" id="L87" title="1 of 2 branches missed.">		if (supervisor == null) {</span>
+<span class="nc" id="L88">			this.supervisor = null;</span>
+<span class="nc" id="L89">		} else {</span>
+<span class="pc bpc" id="L90" title="1 of 2 branches missed.">			if (supervisor.getRank() &lt;= this.getRank()) {</span>
+<span class="nc" id="L91">				throw new InvalidSupervisorException(&quot;Supervisor debe tener mayor rango que &quot; + getName() + &quot;.&quot;);</span>
+			}
+<span class="fc" id="L93">			this.supervisor = supervisor;</span>
+		}
+<span class="fc" id="L95">	}</span>
+
+	public void addTeamMember(PinkGuards member) {
+<span class="nc bnc" id="L98" title="All 2 branches missed.">		if (member != null) {</span>
+<span class="nc" id="L99">			this.team.add(member);</span>
+		}
+<span class="nc" id="L101">	}</span>
+
+	@Override
+	public int getRank() {
+<span class="fc" id="L105">		return 2;</span>
+	}
+
+	@Override
+	public String toString() {
+<span class="nc" id="L110">		String info = &quot;Soldier | Nombre: %s | Arma: %s | Munición: %d&quot;;</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">		if (supervisor != null) {</span>
+<span class="nc" id="L112">			info += &quot; | Supervisor: %s&quot;;</span>
+<span class="nc" id="L113">			return String.format(info + &quot; | Equipo: %d miembros&quot;, name, weapon, munition, supervisor.name, team.size());</span>
+		}
+<span class="nc" id="L115">		return String.format(info + &quot; | Equipo: %d miembros&quot;, name, weapon, munition, team.size());</span>
+	}
+
+	@Override
+	public boolean equals(Object o) {
+<span class="fc bfc" id="L120" title="All 2 branches covered.">		if (this == o)</span>
+<span class="fc" id="L121">			return true;</span>
+<span class="pc bpc" id="L122" title="1 of 2 branches missed.">		if (!(o instanceof Soldiers))</span>
+<span class="fc" id="L123">			return false;</span>
+<span class="nc" id="L124">		Soldiers soldiers = (Soldiers) o;</span>
+<span class="nc bnc" id="L125" title="All 4 branches missed.">		return munition == soldiers.munition &amp;&amp; weapon == soldiers.weapon</span>
+<span class="nc bnc" id="L126" title="All 4 branches missed.">				&amp;&amp; Objects.equals(getName(), soldiers.getName()) &amp;&amp; Objects.equals(supervisor, soldiers.supervisor);</span>
+	}
+
+	@Override
+	public int hashCode() {
+<span class="nc" id="L131">		return Objects.hash(getName(), weapon, munition, supervisor);</span>
+	}
+
+	@Override
+	protected boolean contains(PinkGuards members) {
+		// TODO Auto-generated method stub
+<span class="nc" id="L137">		return false;</span>
+	}
+
+	@Override
+	protected void add(PinkGuards members) {
+		// TODO Auto-generated method stub
+
+<span class="nc" id="L144">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span>TestJuego (1) (12 mar 2025 18:44:50)</div></body></html>

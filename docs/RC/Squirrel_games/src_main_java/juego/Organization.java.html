@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Organization.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestJuego (1) (12 mar 2025 18:44:50)</a> &gt; <a href="../../index.html" class="el_group">Squirrel_games</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">juego</a> &gt; <span class="el_source">Organization.java</span></div><h1>Organization.java</h1><pre class="source lang-java linenums">package juego;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import excepciones.InvalidSupervisorException;
+import excepciones.OrganizationException;
+
+/**
+ * Clase organización PinkGuards. Registro de miembros, asignación supervisores y equipos y detección de jerarquías.
+ */
+public class Organization {
+	private List&lt;PinkGuards&gt; members;
+
+	/**
+	 * Crea instancia de la organización.
+	 */
+<span class="fc" id="L18">	public Organization() {</span>
+<span class="fc" id="L19">		this.members = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L20">	}</span>
+
+	/**
+	 * Registro nuevos miembros. Valida supervisor y su registro.
+	 * @param member miembro a registrar
+	 * @throws OrganizationException si membro es nulo, está registrado o supervisor no encontrado
+	 */
+	public void registerManager(Managers manager) throws OrganizationException {
+<span class="pc bpc" id="L28" title="1 of 2 branches missed.">		if (manager == null) {</span>
+<span class="nc" id="L29">			throw new OrganizationException(&quot;El Manager no puede ser nulo.&quot;);</span>
+		}
+<span class="fc bfc" id="L31" title="All 2 branches covered.">		if (this.members.contains(manager)) {</span>
+<span class="fc" id="L32">			throw new OrganizationException(&quot;El Manager ya se encuentra registrado en la organización.&quot;);</span>
+		}
+<span class="fc" id="L34">		this.members.add(manager);</span>
+<span class="fc" id="L35">	}</span>
+
+	/**
+	 * Asigna supervisor a miembro registrado. Valida existencia y jerarquía.
+	 * @param subordinate miembro a supervisar
+	 * @param supervisor (a asignar)
+	 * @throws OrganizationException si miembro no registrado o no sigue jerarquía
+	 */
+	public void assignSupervisor(PinkGuards supervisor, PinkGuards subordinate) throws OrganizationException {
+		try {
+<span class="pc bpc" id="L45" title="2 of 4 branches missed.">			if (subordinate == null || supervisor == null) {</span>
+<span class="nc" id="L46">				throw new OrganizationException(&quot;Los miembros no pueden ser nulos.&quot;);</span>
+			}
+<span class="pc bpc" id="L48" title="1 of 2 branches missed.">			if (!members.contains(subordinate)) {</span>
+<span class="nc" id="L49">				throw new OrganizationException(&quot;El miembro subordinate no está registrado en la organización.&quot;);</span>
+			}
+<span class="pc bpc" id="L51" title="1 of 2 branches missed.">			if (!members.contains(supervisor)) {</span>
+<span class="nc" id="L52">				throw new OrganizationException(&quot;El supervisor no está registrado en la organización.&quot;);</span>
+			}
+			//Managers no pueden tener supervisor
+<span class="pc bpc" id="L55" title="1 of 2 branches missed.">			if (subordinate instanceof Managers) {</span>
+<span class="nc" id="L56">				throw new OrganizationException(&quot;Un Manager no puede tener supervisor.&quot;);</span>
+			}
+<span class="pc bpc" id="L58" title="1 of 2 branches missed.">			if (hasCycle(subordinate, supervisor)) {</span>
+<span class="nc" id="L59">				throw new OrganizationException(&quot;Asignación cíclica detectada: '&quot; + supervisor.getName()</span>
+<span class="nc" id="L60">						+ &quot;' ya supervisa, directa o indirectamente, a '&quot; + subordinate.getName() + &quot;'.&quot;);</span>
+			}
+<span class="nc" id="L62">		} catch (OrganizationException e) {</span>
+<span class="nc" id="L63">			System.err.println(e.getMessage());</span>
+		}
+
+		try {
+<span class="pc bpc" id="L67" title="1 of 2 branches missed.">			if (subordinate instanceof Workers) {</span>
+<span class="nc" id="L68">				((Workers) subordinate).setSupervisor(supervisor);</span>
+
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">			} else if (subordinate instanceof Soldiers) {</span>
+<span class="fc" id="L71">				((Soldiers) subordinate).setSupervisor(supervisor);</span>
+			}
+<span class="pc" id="L73">		} catch (InvalidSupervisorException e) {</span>
+<span class="nc" id="L74">			System.err.println(&quot;Error al asignar supervisor: &quot; + e.getMessage());</span>
+		}
+<span class="fc" id="L76">	}</span>
+
+	/**
+	 * Verificación si candidateSupervisor como supervisor de subordinate genera ciclo jerárquico
+	 * @param subordinate miembro subordinado
+	 * @param candidateSupervisor candidato a supervisor
+	 * @return true si ciclo, false si no
+	 */
+	private boolean hasCycle(PinkGuards subordinate, PinkGuards candidateSupervisor) {
+<span class="fc" id="L85">		PinkGuards current = candidateSupervisor;</span>
+<span class="pc bpc" id="L86" title="1 of 2 branches missed.">		while (current != null) {</span>
+<span class="pc bpc" id="L87" title="1 of 2 branches missed.">			if (current.equals(subordinate)) {</span>
+<span class="nc" id="L88">				return true;</span>
+			}
+			//Managers no tienen supervisor
+<span class="pc bpc" id="L91" title="1 of 2 branches missed.">			if (current instanceof Managers) {</span>
+<span class="fc" id="L92">				break;</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">			} else if (current instanceof Workers) {</span>
+<span class="nc" id="L94">				current = ((Workers) current).getSupervisor();</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">			} else if (current instanceof Soldiers) {</span>
+<span class="nc" id="L96">				current = ((Soldiers) current).getSupervisor();</span>
+			} else {
+				break;
+			}
+		}
+<span class="fc" id="L101">		return false;</span>
+	}
+
+	/**
+	 * Asigna subordinate a equipo de Manager:
+	 * @param manager que gestiona subordinate
+	 * @param subordinate a asignar en equipo
+	 * @throws OrganizationException si miembro no registrado o asignación rompe jerarquía
+	 */
+	public void addTeamMember(PinkGuards managers, PinkGuards subordinate) throws OrganizationException {
+		try {
+<span class="pc bpc" id="L112" title="1 of 2 branches missed.">			if (!members.contains(subordinate)) {</span>
+<span class="fc" id="L113">				members.add(subordinate);</span>
+			}
+<span class="pc bpc" id="L115" title="2 of 4 branches missed.">			if (managers == null || subordinate == null) {</span>
+<span class="nc" id="L116">				throw new OrganizationException(&quot;Los miembros no pueden ser nulos.&quot;);</span>
+			}
+<span class="pc bpc" id="L118" title="1 of 2 branches missed.">			if (!members.contains(managers)) {</span>
+<span class="nc" id="L119">				throw new OrganizationException(&quot;El Manager no está registrado en la organización.&quot;);</span>
+			}
+			//Manager no puede ser subordinate
+<span class="fc bfc" id="L122" title="All 2 branches covered.">			if (subordinate instanceof Managers) {</span>
+<span class="fc" id="L123">				throw new OrganizationException(</span>
+<span class="fc" id="L124">						&quot;No se puede asignar un Manager como miembro del equipo de otro Manager.&quot;);</span>
+			}
+<span class="pc bpc" id="L126" title="3 of 4 branches missed.">			if (managers instanceof Soldiers &amp;&amp; !(subordinate instanceof Workers)) {</span>
+<span class="nc" id="L127">				throw new OrganizationException(&quot;Un Soldier solo puede supervisar Workers.&quot;);</span>
+			}
+<span class="pc bpc" id="L129" title="4 of 6 branches missed.">			if (managers instanceof Managers &amp;&amp; !(subordinate instanceof Soldiers || subordinate instanceof Workers)) {</span>
+<span class="nc" id="L130">				throw new OrganizationException(&quot;Un Manager solo puede supervisar Soldiers o Workers.&quot;);</span>
+			}
+			//Verifica subordinado no asignado a otro Manager
+<span class="fc bfc" id="L133" title="All 2 branches covered.">			for (PinkGuards member : members) {</span>
+<span class="fc bfc" id="L134" title="All 2 branches covered.">				if (member instanceof Managers) {</span>
+<span class="fc" id="L135">					Managers mgr = (Managers) member;</span>
+<span class="pc bpc" id="L136" title="3 of 4 branches missed.">					if (mgr != managers &amp;&amp; mgr.getTeam().contains(subordinate)) {</span>
+<span class="nc" id="L137">						throw new OrganizationException(&quot;El miembro ya está asignado al equipo de otro Manager.&quot;);</span>
+					}
+				}
+			}
+
+			
+<span class="pc bpc" id="L143" title="1 of 2 branches missed.">			if (managers instanceof Managers) {</span>
+<span class="fc" id="L144">				((Managers) managers).addTeamMember(subordinate);</span>
+
+<span class="pc bnc" id="L146" title="All 2 branches missed.">			} else if (managers instanceof Soldiers) {</span>
+<span class="nc" id="L147">				((Soldiers) managers).addTeamMember(subordinate);</span>
+			}
+<span class="fc" id="L149">			assignSupervisor(managers, subordinate);</span>
+<span class="fc" id="L150">		} catch (OrganizationException e) {</span>
+<span class="fc" id="L151">			System.err.println(e.getMessage());</span>
+		}
+<span class="fc" id="L153">	}</span>
+
+	/**
+	 * Busca miembro organización por nombre:
+	 * @param name nombre miembro
+	 * @return instancia PinkGuard encontrado; null si no encontrado
+	 */
+	public PinkGuards getMember(String name) {
+<span class="pc bpc" id="L161" title="1 of 2 branches missed.">		for (PinkGuards member : members) {</span>
+<span class="pc bpc" id="L162" title="1 of 2 branches missed.">			if (member.getName().equals(name)) {</span>
+<span class="fc" id="L163">				return member;</span>
+			}
+		}
+<span class="nc" id="L166">		return null;</span>
+	}
+
+	/**
+	 * Devuelve lista miembros registrados:
+	 * @return lista miembros
+	 */
+	public List&lt;PinkGuards&gt; getMembers() {
+<span class="fc" id="L174">		return new ArrayList&lt;&gt;(members);</span>
+	}
+	
+	@Override
+	public String toString() {
+<span class="nc" id="L179">		StringBuilder sb = new StringBuilder(&quot;Organización:&quot;);</span>
+<span class="nc bnc" id="L180" title="All 2 branches missed.">		for (PinkGuards member : members) {</span>
+<span class="nc" id="L181">			sb.append(&quot;\n&quot;).append(member);</span>
+		}
+<span class="nc" id="L183">		return sb.toString();</span>
+	}
+	
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span>TestJuego (1) (12 mar 2025 18:44:50)</div></body></html>
