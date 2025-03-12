@@ -77,7 +77,6 @@ Squirrel_games/
 - `index.html`: Página principal del juego.
 - `css/style.css`: Estilos generales del sitio web.
 - `js/script.js`: Scripts de animación e interacción.
-- `img/logo.png`: Logo del juego.
 - `pag/documentacion/doc_usuario.html`: Documentación de usuario.
 
 ---
